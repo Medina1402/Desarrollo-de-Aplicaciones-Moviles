@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="3"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <Button
+        android:onClick="changeLayoutToLinear"
+        android:layout_width="0dp"
+        android:layout_columnWeight="1"
+        android:layout_height="60dp"
+        android:text="@string/linear_layout"
+        tools:ignore="ButtonStyle" />
+
+    <Button
+        android:onClick="changeLayoutToGrid"
+        android:layout_width="0dp"
+        android:layout_columnWeight="1"
+        android:layout_height="60dp"
+        android:text="@string/grid_layout"
+        tools:ignore="ButtonStyle" />
+
+    <Button
+        android:onClick="changeLayoutToFrame"
+        android:layout_width="0dp"
+        android:layout_columnWeight="1"
+        android:layout_height="60dp"
+        android:text="@string/frame_layout"
+        tools:ignore="ButtonStyle" />
+
+    <Button
+        android:onClick="changeLayoutToExercise1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="@string/Exercise_1"
+        android:layout_columnSpan="3"
+        tools:ignore="ButtonStyle" />
+
+    <Button
+        android:onClick="changeLayoutToExercise2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="@string/Exercise_2"
+        android:layout_columnSpan="3"
+        tools:ignore="ButtonStyle" />
+
+</GridLayout>

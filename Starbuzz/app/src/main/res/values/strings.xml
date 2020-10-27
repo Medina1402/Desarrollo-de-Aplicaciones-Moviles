@@ -1,0 +1,21 @@
+<resources>
+    <string name="shopping">Add To Car</string>
+
+    <!-- Top Level Activity -->
+    <string name="app_name"> </string>
+    <string-array name="options">
+        <item>Drinks</item>
+        <item>Food</item>
+        <item>Stores</item>
+    </string-array>
+
+    <!-- Activity Drink -->
+    <string name="title_category_activity_drink">Drinks</string>
+
+    <!-- Activity Food-->
+    <string name="title_category_activity_food">Foods</string>
+
+    <!-- Activity Food-->
+    <string name="title_category_activity_store">Store</string>
+    <string name="website">Store Website</string>
+</resources>

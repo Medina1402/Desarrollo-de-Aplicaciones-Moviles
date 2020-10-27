@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Exercises with Layouts</string>
+
+    <!-- Menu -->
+    <string name="linear_layout">Linear</string>
+    <string name="grid_layout">Grid</string>
+    <string name="frame_layout">Frame</string>
+    <string name="Exercise_1">Exercise 1</string>
+    <string name="Exercise_2">Exercise 2</string>
+
+    <!-- For Any -->
+    <string name="to_hint">To: </string>
+    <string name="hint_message">Message</string>
+    <string name="button_message">Send</string>
+    <string name="grid_hint_email">Enter email address</string>
+    <string name="frame_text">Its a chicken</string>
+    <string name="sound_chicken">Muuuu!!!</string>
+
+    <!-- Exercises -->
+    <string name="message_exercise_1">Thanks for choosing our awesome blend tea. How do you want it serving?</string>
+    <string name="message_exercise_2">How do you like your tea served?</string>
+    <string name="description_exercise_1">Temperature: </string>
+    <string name="hot">HOT</string>
+    <string name="cold">COLD</string>
+
+    <string name="milk">Milk</string>
+    <string name="sugar">Sugar</string>
+    <string name="lemon">Lemon</string>
+</resources>
