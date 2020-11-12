@@ -14,7 +14,8 @@ public class StoreModel {
                 "name text," +
                 "service text," +
                 "description text," +
-                "image_resource_id integer" +
+                "image_resource_id integer," +
+                "favorite integer" +
         ");";
         sqLiteDatabase.execSQL(query);
     }
@@ -26,6 +27,7 @@ public class StoreModel {
         contentValues.put("service", service);
         contentValues.put("description", description);
         contentValues.put("image_resource_id", resourceId);
+        contentValues.put("favorite", 0);
         sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
     }
 

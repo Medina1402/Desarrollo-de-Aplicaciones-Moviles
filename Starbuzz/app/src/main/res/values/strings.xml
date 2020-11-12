@@ -1,5 +1,7 @@
 <resources>
     <string name="shopping">Add To Car</string>
+    <string name="favorites">FAVORITES</string>
+    <string name="add_favorite">Favorite</string>
 
     <!-- Top Level Activity -->
     <string name="app_name"> </string>

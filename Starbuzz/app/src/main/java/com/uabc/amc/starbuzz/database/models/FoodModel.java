@@ -13,7 +13,8 @@ public class FoodModel {
                 "_id integer primary key autoincrement," +
                 "name text," +
                 "description text," +
-                "image_resource_id integer" +
+                "image_resource_id integer," +
+                "favorite integer" +
         ");";
         sqLiteDatabase.execSQL(query);
     }
@@ -24,6 +25,7 @@ public class FoodModel {
         contentValues.put("name", name);
         contentValues.put("description", description);
         contentValues.put("image_resource_id", resourceId);
+        contentValues.put("favorite", 0);
         sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
     }
 

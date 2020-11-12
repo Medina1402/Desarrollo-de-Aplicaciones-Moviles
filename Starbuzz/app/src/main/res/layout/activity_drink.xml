@@ -15,6 +15,15 @@
         android:layout_height="300dp"
         tools:ignore="ContentDescription" />
 
+    <CheckBox
+        android:id="@+id/drink_checkBox"
+        android:onClick="ToggleCheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="@string/add_favorite"
+        tools:ignore="RtlHardcoded" />
+
     <TextView
         android:id="@+id/name"
         android:layout_marginVertical="15dp"
@@ -46,6 +55,5 @@
         android:background="@color/colorAccent"
         android:backgroundTintMode="src_over"
         android:text="@string/shopping" />
-
 
 </LinearLayout>

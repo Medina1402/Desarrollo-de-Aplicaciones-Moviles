@@ -23,9 +23,18 @@
                 android:id="@+id/photo"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
-                android:layout_marginBottom="20dp"
                 android:scaleType="centerCrop"
                 tools:ignore="ContentDescription" />
+
+            <CheckBox
+                android:layout_marginHorizontal="20dp"
+                android:id="@+id/store_checkBox"
+                android:onClick="ToggleCheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="@string/add_favorite"
+                tools:ignore="RtlHardcoded" />
 
             <TextView
                 android:id="@+id/name"

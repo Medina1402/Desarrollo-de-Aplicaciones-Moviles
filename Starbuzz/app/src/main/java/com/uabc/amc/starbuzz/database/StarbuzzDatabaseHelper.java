@@ -11,7 +11,7 @@ import com.uabc.amc.starbuzz.database.models.FoodModel;
 import com.uabc.amc.starbuzz.database.models.StoreModel;
 
 public class StarbuzzDatabaseHelper extends SQLiteOpenHelper {
-    private static final String DB_NAME = "db_starbuzz";
+    private static final String DB_NAME = "starbuzz";
     private static final int DB_VERSION = 1;
 
     public StarbuzzDatabaseHelper(@Nullable Context context) {
