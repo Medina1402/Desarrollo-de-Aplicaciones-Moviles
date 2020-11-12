@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.uabc.amc.starbuzz.R;
+import com.uabc.amc.starbuzz.activities.FavoriteAsyncTask;
 import com.uabc.amc.starbuzz.database.StarbuzzDatabaseHelper;
 import com.uabc.amc.starbuzz.database.models.DrinkModel;
 import com.uabc.amc.starbuzz.database.models.FoodModel;
@@ -76,20 +77,26 @@ public class FoodActivity extends AppCompatActivity {
      * Update favorites of table DRINK
      */
     public void ToggleCheckbox(View view) {
-        int drinkId = (int) Objects.requireNonNull(getIntent().getExtras()).get(EXTRA_FOOD_ID);
+        int foodId = (int) Objects.requireNonNull(getIntent().getExtras()).get(EXTRA_FOOD_ID);
 
-        CheckBox checkBox = findViewById(R.id.food_checkBox);
-        ContentValues values = new ContentValues();
-        values.put("favorite", checkBox.isChecked());
+        new FavoriteAsyncTask(
+                findViewById(R.id.food_checkBox),
+                this,
+                FoodModel.TABLE_NAME
+        ).execute(foodId);
 
-        SQLiteOpenHelper starbuzzDatabaseHelper = new StarbuzzDatabaseHelper(this);
-        try {
-            SQLiteDatabase database = starbuzzDatabaseHelper.getWritableDatabase();
-            database.update(FoodModel.TABLE_NAME, values, "_id = ?", new String[] {Integer.toString(drinkId)});
-            database.close();
-        } catch (SQLException ignored) {
-            Toast toast = Toast.makeText(this, "Food Activity - Database unavailable checkbox", Toast.LENGTH_SHORT);
-            toast.show();
-        }
+//        CheckBox checkBox = findViewById(R.id.food_checkBox);
+//        ContentValues values = new ContentValues();
+//        values.put("favorite", checkBox.isChecked());
+//
+//        SQLiteOpenHelper starbuzzDatabaseHelper = new StarbuzzDatabaseHelper(this);
+//        try {
+//            SQLiteDatabase database = starbuzzDatabaseHelper.getWritableDatabase();
+//            database.update(FoodModel.TABLE_NAME, values, "_id = ?", new String[] {Integer.toString(drinkId)});
+//            database.close();
+//        } catch (SQLException ignored) {
+//            Toast toast = Toast.makeText(this, "Food Activity - Database unavailable checkbox", Toast.LENGTH_SHORT);
+//            toast.show();
+//        }
     }
 }

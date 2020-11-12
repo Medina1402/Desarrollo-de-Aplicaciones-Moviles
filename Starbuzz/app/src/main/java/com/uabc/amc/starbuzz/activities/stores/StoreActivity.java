@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.uabc.amc.starbuzz.R;
+import com.uabc.amc.starbuzz.activities.FavoriteAsyncTask;
 import com.uabc.amc.starbuzz.database.StarbuzzDatabaseHelper;
 import com.uabc.amc.starbuzz.database.models.FoodModel;
 import com.uabc.amc.starbuzz.database.models.StoreModel;
@@ -77,20 +78,26 @@ public class StoreActivity extends AppCompatActivity {
     }
 
     public void ToggleCheckbox(View view) {
-        int drinkId = (int) Objects.requireNonNull(getIntent().getExtras()).get(EXTRA_STORE_ID);
+        int storeId = (int) Objects.requireNonNull(getIntent().getExtras()).get(EXTRA_STORE_ID);
 
-        CheckBox checkBox = findViewById(R.id.store_checkBox);
-        ContentValues values = new ContentValues();
-        values.put("favorite", checkBox.isChecked());
+        new FavoriteAsyncTask(
+                findViewById(R.id.store_checkBox),
+                this,
+                StoreModel.TABLE_NAME
+        ).execute(storeId);
 
-        SQLiteOpenHelper starbuzzDatabaseHelper = new StarbuzzDatabaseHelper(this);
-        try {
-            SQLiteDatabase database = starbuzzDatabaseHelper.getWritableDatabase();
-            database.update(StoreModel.TABLE_NAME, values, "_id = ?", new String[] {Integer.toString(drinkId)});
-            database.close();
-        } catch (SQLException ignored) {
-            Toast toast = Toast.makeText(this, "Store Activity - Database unavailable checkbox", Toast.LENGTH_SHORT);
-            toast.show();
-        }
+//        CheckBox checkBox = findViewById(R.id.store_checkBox);
+//        ContentValues values = new ContentValues();
+//        values.put("favorite", checkBox.isChecked());
+//
+//        SQLiteOpenHelper starbuzzDatabaseHelper = new StarbuzzDatabaseHelper(this);
+//        try {
+//            SQLiteDatabase database = starbuzzDatabaseHelper.getWritableDatabase();
+//            database.update(StoreModel.TABLE_NAME, values, "_id = ?", new String[] {Integer.toString(drinkId)});
+//            database.close();
+//        } catch (SQLException ignored) {
+//            Toast toast = Toast.makeText(this, "Store Activity - Database unavailable checkbox", Toast.LENGTH_SHORT);
+//            toast.show();
+//        }
     }
 }

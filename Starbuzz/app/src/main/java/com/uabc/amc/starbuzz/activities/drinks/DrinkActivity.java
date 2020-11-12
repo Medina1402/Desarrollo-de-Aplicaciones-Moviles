@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.uabc.amc.starbuzz.R;
+import com.uabc.amc.starbuzz.activities.FavoriteAsyncTask;
 import com.uabc.amc.starbuzz.database.StarbuzzDatabaseHelper;
 import com.uabc.amc.starbuzz.database.models.DrinkModel;
 
@@ -77,18 +78,24 @@ public class DrinkActivity extends AppCompatActivity {
     public void ToggleCheckbox(View view) {
         final int drinkId = (int) Objects.requireNonNull(getIntent().getExtras()).get(EXTRA_DRINK_ID);
 
-        CheckBox checkBox = findViewById(R.id.drink_checkBox);
-        ContentValues values = new ContentValues();
-        values.put("favorite", checkBox.isChecked());
+        new FavoriteAsyncTask(
+                findViewById(R.id.drink_checkBox),
+                this,
+                DrinkModel.TABLE_NAME
+        ).execute(drinkId);
 
-        SQLiteOpenHelper starbuzzDatabaseHelper = new StarbuzzDatabaseHelper(this);
-        try {
-            SQLiteDatabase database = starbuzzDatabaseHelper.getWritableDatabase();
-            database.update(DrinkModel.TABLE_NAME, values, "_id = ?", new String[] {Integer.toString(drinkId)});
-            database.close();
-        } catch (SQLException ignored) {
-            Toast toast = Toast.makeText(this, "Drink Activity - Database unavailable checkbox", Toast.LENGTH_SHORT);
-            toast.show();
-        }
+//        CheckBox checkBox = findViewById(R.id.drink_checkBox);
+//        ContentValues values = new ContentValues();
+//        values.put("favorite", checkBox.isChecked());
+//
+//        SQLiteOpenHelper starbuzzDatabaseHelper = new StarbuzzDatabaseHelper(this);
+//        try {
+//            SQLiteDatabase database = starbuzzDatabaseHelper.getWritableDatabase();
+//            database.update(DrinkModel.TABLE_NAME, values, "_id = ?", new String[] {Integer.toString(drinkId)});
+//            database.close();
+//        } catch (SQLException ignored) {
+//            Toast toast = Toast.makeText(this, "Drink Activity - Database unavailable checkbox", Toast.LENGTH_SHORT);
+//            toast.show();
+//        }
     }
 }
