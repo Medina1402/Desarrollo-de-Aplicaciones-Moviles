@@ -16,6 +16,17 @@ class WorkoutDetailFragment : Fragment() {
         this.workoutId = id
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if(savedInstanceState != null) {
+            workoutId = savedInstanceState.getLong("workoutId")
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        workoutId?.let { outState.putLong("workoutId", it) }
+    }
+
     override fun onStart() {
         super.onStart()
 

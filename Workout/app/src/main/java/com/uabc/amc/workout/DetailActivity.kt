@@ -10,7 +10,7 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
+        setContentView(R.layout.activity_main)
 
         val frag = supportFragmentManager.findFragmentById(R.id.detail_frag) as WorkoutDetailFragment
         val workoutId = intent.extras?.get(EXTRA_WORKOUT_ID) as Int
