@@ -2,6 +2,7 @@ package com.uabc.amc.workout
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentTransaction
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +19,15 @@ class WorkoutDetailFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if(savedInstanceState != null) {
+        if(savedInstanceState == null) {
+            val stopwatch = StopwatchFragment()
+            val ft = childFragmentManager.beginTransaction()
+            ft.add(R.id.stopwatch_container, stopwatch)
+            ft.addToBackStack(null)
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            ft.commit()
+
+        } else {
             workoutId = savedInstanceState.getLong("workoutId")
         }
     }
@@ -45,7 +54,6 @@ class WorkoutDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_workout_detail, container, false)
     }
 }

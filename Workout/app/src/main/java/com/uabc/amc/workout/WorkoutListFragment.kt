@@ -23,7 +23,7 @@ class WorkoutListFragment: ListFragment() {
     ): View? {
 
         val names: Array<String> = Workouts.map { T -> T.getName() }.toTypedArray()
-        this.listAdapter = ArrayAdapter(inflater.context, android.R.layout.simple_list_item_1, names)
+        listAdapter = ArrayAdapter(inflater.context, android.R.layout.simple_list_item_1, names)
 
         return super.onCreateView(inflater, container, savedInstanceState)
     }
