@@ -6,27 +6,10 @@
 
     <string name="title_top">Top fragment</string>
 
-    <string-array name="pizzas">
-        <item>Diavalo</item>
-        <item>Funghi</item>
-    </string-array>
-
-    <string-array name="pasta">
-        <item>Spaghetti Bolognese</item>
-        <item>Lasagne</item>
-    </string-array>
-
-    <string-array name="stores">
-        <item>Cambridge</item>
-        <item>Sebastopol</item>
-    </string-array>
-
-
     <string name="home_tab">HOME</string>
     <string name="pizza_tab">PIZZA</string>
     <string name="pasta_tab">PASTA</string>
     <string name="store_tab">STORE</string>
-
 
     <string name="company_name">Bits and Pizzas</string>
     <string name="restaurant_image">Restaurant Image</string>

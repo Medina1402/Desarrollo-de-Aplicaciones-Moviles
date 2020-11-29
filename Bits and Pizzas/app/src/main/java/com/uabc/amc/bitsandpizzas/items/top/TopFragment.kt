@@ -1,10 +1,11 @@
-package com.uabc.amc.bitsandpizzas
+package com.uabc.amc.bitsandpizzas.items.top
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.uabc.amc.bitsandpizzas.R
 
 class TopFragment : Fragment() {
     override fun onCreateView(

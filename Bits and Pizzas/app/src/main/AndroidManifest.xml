@@ -13,15 +13,28 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".OrderActivity"
+        <activity android:name=".activities.OrderActivity"
             android:label="@string/create_order"
             android:parentActivityName=".MainActivity">
-            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".MainActivity"/>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         </activity>
+
+        <activity android:name=".items.pizza.PizzaDetailActivity"
+            android:parentActivityName=".MainActivity"/>
+
+        <activity android:name=".items.pasta.PastaDetailActivity"
+            android:parentActivityName=".MainActivity"/>
+
+        <activity android:name=".items.store.StoreDetailActivity"
+            android:parentActivityName=".MainActivity"/>
+
     </application>
 
 </manifest>

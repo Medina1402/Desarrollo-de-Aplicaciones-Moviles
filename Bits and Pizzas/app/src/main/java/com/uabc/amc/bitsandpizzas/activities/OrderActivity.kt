@@ -1,11 +1,13 @@
-package com.uabc.amc.bitsandpizzas
+package com.uabc.amc.bitsandpizzas.activities
 
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.Toast
+import com.uabc.amc.bitsandpizzas.R
 
 class OrderActivity : AppCompatActivity() {
 
@@ -13,7 +15,7 @@ class OrderActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order)
 
-        val toolbar = findViewById<android.support.v7.widget.Toolbar>(R.id.toolbar)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar_order)
         setSupportActionBar(toolbar)
 
         val actionBar = supportActionBar

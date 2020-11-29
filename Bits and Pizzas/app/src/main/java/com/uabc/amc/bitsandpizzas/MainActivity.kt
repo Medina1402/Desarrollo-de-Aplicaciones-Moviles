@@ -14,10 +14,13 @@ import android.support.v7.widget.ShareActionProvider
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
-
+import com.uabc.amc.bitsandpizzas.activities.OrderActivity
+import com.uabc.amc.bitsandpizzas.items.pasta.PastaFragment
+import com.uabc.amc.bitsandpizzas.items.pizza.PizzaFragment
+import com.uabc.amc.bitsandpizzas.items.store.StoresFragment
+import com.uabc.amc.bitsandpizzas.items.top.TopFragment
 
 class MainActivity : AppCompatActivity() {
-
     private var sharedActionProvider: ShareActionProvider? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         val menuItem = menu?.findItem(R.id.action_share)
-        sharedActionProvider = MenuItemCompat.getActionProvider(menuItem) as ShareActionProvider?
+        this.sharedActionProvider = MenuItemCompat.getActionProvider(menuItem) as ShareActionProvider?
         setShareActionIntent("Want to join me for pizza?")
 
         return super.onCreateOptionsMenu(menu)
