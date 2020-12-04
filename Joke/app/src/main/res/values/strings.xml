@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Joke</string>
+    <string name="show_notification">Show notification</string>
+    <string name="message_notify">Message Notification</string>
+</resources>
