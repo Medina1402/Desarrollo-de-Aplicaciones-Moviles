@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_navigation_movie"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_local_movies_24"
+        android:title="@string/item_navigation_movie_text"/>
+    <item
+        android:id="@+id/item_navigation_search"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="@string/item_navigation_search_text"/>
+    <item
+        android:id="@+id/item_navigation_history"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_history_24"
+        android:title="@string/item_navigation_history_text"/>
+    <item
+        android:id="@+id/item_navigation_account"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        android:title="@string/item_navigation_account_text"/>
+</menu>
