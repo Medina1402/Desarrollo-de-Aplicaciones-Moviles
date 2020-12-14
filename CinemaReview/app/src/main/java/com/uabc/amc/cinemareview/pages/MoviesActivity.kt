@@ -3,14 +3,12 @@ package com.uabc.amc.cinemareview.pages
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.viewpager2.widget.ViewPager2
 import com.uabc.amc.cinemareview.R
 import com.uabc.amc.cinemareview.views.AccountViewFragment
 import com.uabc.amc.cinemareview.views.HistoryViewFragment
 import com.uabc.amc.cinemareview.views.MovieViewFragment
 import com.uabc.amc.cinemareview.views.SearchViewFragment
 import kotlinx.android.synthetic.main.activity_movies.*
-import kotlinx.android.synthetic.main.fragment_movie_view.*
 
 class MoviesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

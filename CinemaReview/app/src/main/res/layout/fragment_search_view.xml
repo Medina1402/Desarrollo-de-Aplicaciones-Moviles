@@ -18,7 +18,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/search_title_movie"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             app:boxStrokeColor="@color/colorText_2"
             app:boxCornerRadiusBottomEnd="100sp"
             app:boxCornerRadiusTopEnd="100sp"

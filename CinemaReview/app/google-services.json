@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "675052252159",
+    "project_id": "cinema-review-3cc86",
+    "storage_bucket": "cinema-review-3cc86.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:675052252159:android:a16cd070ece7e772f895ca",
+        "android_client_info": {
+          "package_name": "com.uabc.amc.cinemareview"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "675052252159-dgt2hvcooit1fm3jghh6oe7438rr5aul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBymiEvHTpOglaiyKuKSEne9pK0V8zycLQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "675052252159-dgt2hvcooit1fm3jghh6oe7438rr5aul.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
