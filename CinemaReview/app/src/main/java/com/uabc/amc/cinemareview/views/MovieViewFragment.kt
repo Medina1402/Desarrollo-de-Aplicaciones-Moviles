@@ -8,94 +8,78 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uabc.amc.cinemareview.R
 import com.uabc.amc.cinemareview.components.*
-import com.uabc.amc.cinemareview.services.FirestoreCollection
-import com.uabc.amc.cinemareview.services.FirestoreFirebase
+import com.uabc.amc.cinemareview.services.*
 import kotlinx.android.synthetic.main.fragment_movie_view.*
 
 class MovieViewFragment : Fragment(), FirestoreFirebase {
     private var movieBanner = listOf<MovieViewPager>()
     private var movieScroll = listOf<MovieFragmentHorizontal>()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        updateDataFirebaseFirestore()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Download data Firebase
-        updateDataFirebaseFirestore()
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_movie_view, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        // View Pager Adapter
-        view_pager_movie.adapter = MoviesViewPagerAdapter(movieBanner)
-        // Scroll List Movies Adapter
-        movie_fragment_card_slide.apply {
-            layoutManager = LinearLayoutManager(context)
-            setHasFixedSize(true)
-            adapter = context?.let { MovieFragmentHorizontalView(movieScroll, it) }
-        }
+    override fun updateDataFirebaseFirestore() {
+        onLoadMovieScroll()
+        onLoadMovieBanner()
     }
 
-    override fun updateDataFirebaseFirestore() {
-        FirestoreCollection("categories").get().addOnCompleteListener { it.result?.documents?.map { doc -> println(doc.data) } }
+    private fun onLoadMovieBanner() {
+        FirestoreCollection("movie_banner").get()
+            .addOnSuccessListener { result ->
+                val data: ArrayList<MovieViewPager> = ArrayList()
+                for (document in result) {
 
-        movieBanner = listOf(
-            MovieViewPager("Interstelar", "1h 25min", "Accion, Sci-Fi, Drama", R.drawable.crakhaus),
-            MovieViewPager("Gravity", "2h 2min", "Suspenso, Sci-Fi, Drama", R.drawable.crakhaus),
-            MovieViewPager("Star Wars", "8h 12min", "Accion, Snimada, Sci-Fi", R.drawable.crakhaus),
-        )
+                    data.add(MovieViewPager(
+                        document.data["name"] as String,
+                        document.data["duration"] as String,
+                        document.data["categories"] as String,
+                        document.data["image"] as String,
+                    ))
+                }
 
-        movieScroll = listOf(
-            MovieFragmentHorizontal("Destacados de dia", listOf(
-                MovieImageFragment(123445, R.drawable.new_mutants),
-                MovieImageFragment(123446, R.drawable.new_mutants),
-                MovieImageFragment(123447, R.drawable.new_mutants),
-                MovieImageFragment(123448, R.drawable.new_mutants),
-                MovieImageFragment(123449, R.drawable.new_mutants),
-                MovieImageFragment(123445, R.drawable.new_mutants),
-                MovieImageFragment(123446, R.drawable.new_mutants),
-                MovieImageFragment(123447, R.drawable.new_mutants),
-                MovieImageFragment(123448, R.drawable.new_mutants),
-                MovieImageFragment(123449, R.drawable.new_mutants),
-            )),
-            MovieFragmentHorizontal("Destacados de dia", listOf(
-                MovieImageFragment(123445, R.drawable.new_mutants),
-                MovieImageFragment(123446, R.drawable.new_mutants),
-                MovieImageFragment(123447, R.drawable.new_mutants),
-                MovieImageFragment(123448, R.drawable.new_mutants),
-                MovieImageFragment(123449, R.drawable.new_mutants),
-                MovieImageFragment(123445, R.drawable.new_mutants),
-                MovieImageFragment(123446, R.drawable.new_mutants),
-                MovieImageFragment(123447, R.drawable.new_mutants),
-                MovieImageFragment(123448, R.drawable.new_mutants),
-                MovieImageFragment(123449, R.drawable.new_mutants),
-            )),
-            MovieFragmentHorizontal("Destacados de dia", listOf(
-                MovieImageFragment(123445, R.drawable.new_mutants),
-                MovieImageFragment(123446, R.drawable.new_mutants),
-                MovieImageFragment(123447, R.drawable.new_mutants),
-                MovieImageFragment(123448, R.drawable.new_mutants),
-                MovieImageFragment(123449, R.drawable.new_mutants),
-                MovieImageFragment(123445, R.drawable.new_mutants),
-                MovieImageFragment(123446, R.drawable.new_mutants),
-                MovieImageFragment(123447, R.drawable.new_mutants),
-                MovieImageFragment(123448, R.drawable.new_mutants),
-                MovieImageFragment(123449, R.drawable.new_mutants),
-            )),
-            MovieFragmentHorizontal("Destacados de dia", listOf(
-                MovieImageFragment(123445, R.drawable.new_mutants),
-                MovieImageFragment(123446, R.drawable.new_mutants),
-                MovieImageFragment(123447, R.drawable.new_mutants),
-                MovieImageFragment(123448, R.drawable.new_mutants),
-                MovieImageFragment(123449, R.drawable.new_mutants),
-                MovieImageFragment(123445, R.drawable.new_mutants),
-                MovieImageFragment(123446, R.drawable.new_mutants),
-                MovieImageFragment(123447, R.drawable.new_mutants),
-                MovieImageFragment(123448, R.drawable.new_mutants),
-                MovieImageFragment(123449, R.drawable.new_mutants),
-            )),
-        )
+                movieBanner = data.toList()
+
+                // View Pager Adapter
+                view_pager_movie.adapter = MoviesViewPagerAdapter(movieBanner)
+            }
+    }
+
+    private fun onLoadMovieScroll() {
+        FirestoreCollection("categories").get()
+            .addOnSuccessListener { result ->
+
+                val data: ArrayList<MovieFragmentHorizontal> = ArrayList()
+                for (document in result) {
+
+                    val movies: ArrayList<MovieImageFragment> = ArrayList()
+                    // Movies in
+                    FirestoreCollection("categories").document(document.id).collection("movies").get().addOnSuccessListener { snapshot ->
+                        for(movie in snapshot) {
+                            movies.add(MovieImageFragment(movie.id, movie.data["cover"] as String))
+                        }
+                    }
+
+                    data.add(MovieFragmentHorizontal(document.data["name"] as String, movies.toList()))
+                }
+
+                movieScroll = data.toList()
+
+                // Scroll List Movies Adapter
+                movie_fragment_card_slide.apply {
+                    layoutManager = LinearLayoutManager(context)
+                    setHasFixedSize(true)
+                    adapter = context?.let { MovieFragmentHorizontalView(movieScroll, it) }
+                }
+            }
     }
 }

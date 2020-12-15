@@ -6,12 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.uabc.amc.cinemareview.R
 import com.uabc.amc.cinemareview.pages.MovieDescriptionItem
 import kotlinx.android.synthetic.main.item_movie_image_fragment_view.view.*
 
 class MovieImageFragmentView(private val movies: List<MovieImageFragment>) : RecyclerView.Adapter<MovieImageFragmentView.MovieImageFragmentViewHolder>() {
-    private var context: Context? = null
+    private lateinit var context: Context
 
     inner class MovieImageFragmentViewHolder(item: View) : RecyclerView.ViewHolder(item)
 
@@ -23,11 +24,13 @@ class MovieImageFragmentView(private val movies: List<MovieImageFragment>) : Rec
 
     override fun onBindViewHolder(holder: MovieImageFragmentViewHolder, position: Int) {
         val movie = movies[position]
-        holder.itemView.image_view_movie_poster.setImageResource(movie.image)
+
+        Glide.with(context).load(movie.image).into(holder.itemView.image_view_movie_poster)
+
         holder.itemView.setOnClickListener {
             val intent = Intent(context, MovieDescriptionItem::class.java)
             intent.putExtra("MOVIE_ID", movie.id)
-            context?.startActivity(intent)
+            context.startActivity(intent)
         }
     }
 
@@ -36,4 +39,4 @@ class MovieImageFragmentView(private val movies: List<MovieImageFragment>) : Rec
     }
 }
 
-class MovieImageFragment(val id: Int, val image: Int)
+class MovieImageFragment(val id: String, val image: String)
