@@ -19,10 +19,12 @@ class MovieReviewFragment(private val reviewList: List<MovieReview>, private val
 
     override fun onBindViewHolder(holder: MovieReviewFragmentHolder, position: Int) {
         val review = reviewList[position]
+
         holder.itemView.movie_review_username.text = review.author
         holder.itemView.movie_review_date.text = review.date
-        holder.itemView.movie_review_stars.text = review.stars.toString()
+        holder.itemView.movie_review_stars.text = review.stars
         holder.itemView.movie_review_text.text = review.review
+
         holder.itemView.movie_review_shared.setOnClickListener {
             val intentShared = Intent(Intent.ACTION_SEND)
             Intent.FLAG_ACTIVITY_NEW_TASK.also { intentShared.flags = it }
@@ -37,4 +39,4 @@ class MovieReviewFragment(private val reviewList: List<MovieReview>, private val
     }
 }
 
-class MovieReview(val id: String, val author: String, val date: String, val review: String, val stars: Number)
+class MovieReview(val id: String, val author: String, val date: String, val review: String, val stars: String)

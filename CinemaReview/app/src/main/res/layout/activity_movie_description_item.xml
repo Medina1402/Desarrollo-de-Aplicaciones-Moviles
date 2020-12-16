@@ -19,17 +19,24 @@
 
             <ImageView
                 android:id="@+id/movie_description_background"
-                android:scaleType="centerCrop"
-                android:src="@drawable/crakhaus"
                 android:layout_width="match_parent"
                 android:layout_height="90pt"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher_background"
                 tools:ignore="ContentDescription" />
 
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="match_parent"
+                android:layout_height="90pt"
+                android:background="@drawable/degradado" />
+
+
             <LinearLayout
-                android:layout_marginHorizontal="20sp"
-                android:layout_marginTop="25pt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20sp"
+                android:layout_marginTop="25pt"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -40,16 +47,16 @@
                         android:id="@+id/movie_description_cover"
                         android:layout_width="121dp"
                         android:layout_height="176dp"
-                        android:src="@drawable/new_mutants"
-                        android:contentDescription="New_Mutants"
-                        tools:ignore="HardcodedText" />
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_launcher_background"
+                        tools:ignore="ContentDescription,HardcodedText" />
 
                     <LinearLayout
-                        android:layout_marginStart="15dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginBottom="10dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -57,14 +64,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="25sp"
-                            android:text="The New Mutants"
                             android:textStyle="bold"
                             tools:ignore="HardcodedText" />
 
                         <LinearLayout
-                            android:gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:gravity="center"
                             tools:ignore="UseCompoundDrawables">
 
                             <TextView
@@ -75,39 +81,54 @@
                                 tools:ignore="HardcodedText" />
 
                             <TextView
+                                android:id="@+id/movie_description_director"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Stephen King A."
                                 tools:ignore="HardcodedText" />
 
                         </LinearLayout>
 
                         <LinearLayout
-                            android:gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:gravity="center"
                             tools:ignore="UseCompoundDrawables">
 
                             <ImageView
-                                android:src="@drawable/ic_baseline_star_24"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:src="@drawable/ic_baseline_star_24"
                                 tools:ignore="ContentDescription" />
 
                             <TextView
-                                android:paddingHorizontal="5sp"
+                                android:id="@+id/movie_description_stars"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="4.3"
+                                android:paddingHorizontal="5sp"
+                                android:textStyle="bold"
+                                tools:ignore="HardcodedText" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:src="@drawable/ic_baseline_access_time_24"
+                                tools:ignore="ContentDescription" />
+
+                            <TextView
+                                android:id="@+id/movie_description_duration"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingHorizontal="5sp"
                                 android:textStyle="bold"
                                 tools:ignore="HardcodedText" />
 
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/movie_description_categories"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Sci-Fi, Drama, Terror"
                             tools:ignore="HardcodedText" />
 
                     </LinearLayout>
@@ -115,9 +136,9 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="20sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
                     android:orientation="vertical">
 
                     <TextView
@@ -125,23 +146,23 @@
                         android:layout_height="wrap_content"
                         android:paddingBottom="2sp"
                         android:text="Sinopsis"
-                        android:textStyle="bold"
                         android:textSize="20sp"
+                        android:textStyle="bold"
                         tools:ignore="HardcodedText" />
 
                     <TextView
+                        android:id="@+id/movie_description_sinopsis"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
                         android:layout_marginBottom="25sp"
-                        android:text="Cinco jóvenes mutantes que acaban de descubrir sus habilidades, son encerrados en unas instalaciones secretas contra su voluntad y luchan por escapar de su pasado y salvarse a sí mismos."
+                        android:textSize="15sp"
                         tools:ignore="HardcodedText" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="20sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
                     android:orientation="vertical">
 
                     <TextView
@@ -149,33 +170,40 @@
                         android:layout_height="wrap_content"
                         android:paddingBottom="2sp"
                         android:text="Reseñas"
-                        android:textStyle="bold"
                         android:textSize="20sp"
+                        android:textStyle="bold"
                         tools:ignore="HardcodedText" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/movie_list_review_container"
-                        android:orientation="vertical"
-                        android:nestedScrollingEnabled="false"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        android:orientation="vertical" />
 
-<!--                    <TextView-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="100sp"-->
-<!--                        android:gravity="center"-->
-<!--                        android:textStyle="bold"-->
-<!--                        android:textColor="@color/colorText_3"-->
-<!--                        android:textSize="15sp"-->
-<!--                        android:text="SIN RESEÑAS"-->
-<!--                        tools:ignore="HardcodedText" />-->
+                    <TextView
+                        android:id="@+id/movie_list_review_empty"
+                        android:layout_width="match_parent"
+                        android:layout_height="60sp"
+                        android:gravity="center"
+                        android:text="SIN RESEÑAS"
+                        android:textColor="@color/colorText_3"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
 
                 </LinearLayout>
             </LinearLayout>
+
+            <TextureView
+                android:id="@+id/textureView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </FrameLayout>
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/movie_list_review_add_review"
         android:layout_marginVertical="15sp"
         android:layout_marginHorizontal="20sp"
         android:layout_width="match_parent"

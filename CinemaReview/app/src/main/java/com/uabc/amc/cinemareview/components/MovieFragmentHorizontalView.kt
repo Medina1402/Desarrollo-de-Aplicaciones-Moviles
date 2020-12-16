@@ -21,9 +21,10 @@ class MovieFragmentHorizontalView(private val scrollHorizonList: List<MovieFragm
         val movie = scrollHorizonList[position]
         holder.itemView.movie_title_scroll_list.text = movie.title
 
+        val adapter = MovieImageFragmentView(movie.movies, context)
         val recycler = holder.itemView.linear_layout_horizontal_scroll_image
         recycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        recycler.adapter = MovieImageFragmentView(movie.movies)
+        recycler.adapter = adapter
     }
 
     override fun getItemCount(): Int {

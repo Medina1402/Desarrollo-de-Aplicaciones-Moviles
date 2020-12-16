@@ -34,11 +34,11 @@ class MovieViewFragment : Fragment(), FirestoreFirebase {
     }
 
     private fun onLoadMovieBanner() {
+        val data: ArrayList<MovieViewPager> = ArrayList()
+
         FirestoreCollection("movie_banner").get()
             .addOnSuccessListener { result ->
-                val data: ArrayList<MovieViewPager> = ArrayList()
-                for (document in result) {
-
+                result.forEach { document ->
                     data.add(MovieViewPager(
                         document.data["name"] as String,
                         document.data["duration"] as String,
@@ -46,7 +46,7 @@ class MovieViewFragment : Fragment(), FirestoreFirebase {
                         document.data["image"] as String,
                     ))
                 }
-
+            }.addOnCompleteListener {
                 movieBanner = data.toList()
 
                 // View Pager Adapter
@@ -55,31 +55,40 @@ class MovieViewFragment : Fragment(), FirestoreFirebase {
     }
 
     private fun onLoadMovieScroll() {
-        FirestoreCollection("categories").get()
-            .addOnSuccessListener { result ->
+        val query = FirestoreCollection("categories")
 
-                val data: ArrayList<MovieFragmentHorizontal> = ArrayList()
-                for (document in result) {
+        query.get().addOnSuccessListener { result ->
+            val data: ArrayList<MovieFragmentHorizontal> = ArrayList()
+            result.forEach { document ->
+                val movies: ArrayList<MovieImageFragment> = ArrayList()
+                query.document(document.id).collection("movies").get().addOnSuccessListener { snapshot ->
+                    snapshot.forEach { movie ->
 
-                    val movies: ArrayList<MovieImageFragment> = ArrayList()
-                    // Movies in
-                    FirestoreCollection("categories").document(document.id).collection("movies").get().addOnSuccessListener { snapshot ->
-                        for(movie in snapshot) {
-                            movies.add(MovieImageFragment(movie.id, movie.data["cover"] as String))
-                        }
+                        movies.add(MovieImageFragment(
+                            movie.id,
+                            movie.data["cover"] as String,
+                            movie.data["image"] as String,
+                            movie.data["duration"] as String,
+                            movie.data["name"] as String,
+                            movie.data["categories"] as String,
+                            movie.data["sinopsis"] as String,
+                            movie.data["stars"] as String,
+                            movie.data["director"] as String,
+                            document.id
+                        ))
                     }
-
+                }.addOnCompleteListener {
                     data.add(MovieFragmentHorizontal(document.data["name"] as String, movies.toList()))
-                }
+                    movieScroll = data.toList()
 
-                movieScroll = data.toList()
-
-                // Scroll List Movies Adapter
-                movie_fragment_card_slide.apply {
-                    layoutManager = LinearLayoutManager(context)
-                    setHasFixedSize(true)
-                    adapter = context?.let { MovieFragmentHorizontalView(movieScroll, it) }
+                    // Scroll List Movies Adapter
+                    movie_fragment_card_slide.apply {
+                        layoutManager = LinearLayoutManager(context)
+                        setHasFixedSize(true)
+                        adapter = context?.let { MovieFragmentHorizontalView(movieScroll, it) }
+                    }
                 }
             }
+        }
     }
 }

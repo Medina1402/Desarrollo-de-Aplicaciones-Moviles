@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:paddingEnd="16dp"
+            android:paddingStart="6dp"
+            android:background="@color/colorPrimaryDark"
+            app:contentInsetStartWithNavigation="0dp"
+            app:navigationIcon="@drawable/ic_baseline_keyboard_backspace_24" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_marginHorizontal="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5pt"
+                android:text="ESCRIBIR RESEÑA"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintTextColor="@color/colorText_2">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:inputType="textMultiLine"
+                    android:background="@color/colorPrimary"
+                    android:minLines="8"
+                    android:gravity="top|left"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:ignore="RtlHardcoded" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp">
+                <ImageButton
+                    android:id="@+id/star_one"
+                    android:background="@color/colorPrimaryDark"
+                    android:layout_width="30sp"
+                    android:layout_height="30sp"
+                    android:scaleType="centerCrop"
+                    android:layout_marginHorizontal="10dp"
+                    android:src="@drawable/ic_baseline_star_24"/>
+                <ImageButton
+                    android:id="@+id/star_two"
+                    android:background="@color/colorPrimaryDark"
+                    android:layout_width="30sp"
+                    android:layout_height="30sp"
+                    android:scaleType="centerCrop"
+                    android:layout_marginHorizontal="10dp"
+                    android:src="@drawable/ic_baseline_star_24"/>
+                <ImageButton
+                    android:id="@+id/star_three"
+                    android:background="@color/colorPrimaryDark"
+                    android:layout_width="30sp"
+                    android:layout_height="30sp"
+                    android:scaleType="centerCrop"
+                    android:layout_marginHorizontal="10dp"
+                    android:src="@drawable/ic_baseline_star_24"/>
+                <ImageButton
+                    android:id="@+id/star_four"
+                    android:background="@color/colorPrimaryDark"
+                    android:layout_width="30sp"
+                    android:layout_height="30sp"
+                    android:scaleType="centerCrop"
+                    android:layout_marginHorizontal="10dp"
+                    android:src="@drawable/ic_baseline_star_24"/>
+                <ImageButton
+                    android:id="@+id/star_five"
+                    android:background="@color/colorPrimaryDark"
+                    android:layout_width="30sp"
+                    android:layout_height="30sp"
+                    android:scaleType="centerCrop"
+                    android:layout_marginHorizontal="10dp"
+                    android:src="@drawable/ic_baseline_star_24"/>
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/movie_list_review_add_review"
+                android:layout_marginVertical="15sp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="@color/colorText_1"
+                android:textStyle="bold"
+                android:text="ENVIAR"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

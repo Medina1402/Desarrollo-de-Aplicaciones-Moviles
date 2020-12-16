@@ -3,6 +3,7 @@ package com.uabc.amc.cinemareview.pages
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import com.uabc.amc.cinemareview.R
 import com.uabc.amc.cinemareview.views.AccountViewFragment
 import com.uabc.amc.cinemareview.views.HistoryViewFragment

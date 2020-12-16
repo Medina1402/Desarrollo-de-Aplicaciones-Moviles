@@ -11,13 +11,11 @@ import com.uabc.amc.cinemareview.R
 import com.uabc.amc.cinemareview.pages.MovieDescriptionItem
 import kotlinx.android.synthetic.main.item_movie_image_fragment_view.view.*
 
-class MovieImageFragmentView(private val movies: List<MovieImageFragment>) : RecyclerView.Adapter<MovieImageFragmentView.MovieImageFragmentViewHolder>() {
-    private lateinit var context: Context
+class MovieImageFragmentView(private val movies: List<MovieImageFragment>, private val context: Context) : RecyclerView.Adapter<MovieImageFragmentView.MovieImageFragmentViewHolder>() {
 
     inner class MovieImageFragmentViewHolder(item: View) : RecyclerView.ViewHolder(item)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieImageFragmentViewHolder {
-        context = parent.context
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie_image_fragment_view, parent, false)
         return MovieImageFragmentViewHolder(view)
     }
@@ -29,7 +27,17 @@ class MovieImageFragmentView(private val movies: List<MovieImageFragment>) : Rec
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, MovieDescriptionItem::class.java)
-            intent.putExtra("MOVIE_ID", movie.id)
+            intent
+                .putExtra("MOVIE_ID", movie.id)
+                .putExtra("MOVIE_ID_DOCUMENT", movie.idDocument)
+                .putExtra("MOVIE_NAME", movie.name)
+                .putExtra("MOVIE_COVER", movie.image)
+                .putExtra("MOVIE_BANNER", movie.bannerImage)
+                .putExtra("MOVIE_DURATION", movie.duration)
+                .putExtra("MOVIE_CATEGORIES", movie.categories)
+                .putExtra("MOVIE_SINOPSIS", movie.sinopsis)
+                .putExtra("MOVIE_STARS", movie.stars)
+                .putExtra("MOVIE_DIRECTOR", movie.director)
             context.startActivity(intent)
         }
     }
@@ -39,4 +47,15 @@ class MovieImageFragmentView(private val movies: List<MovieImageFragment>) : Rec
     }
 }
 
-class MovieImageFragment(val id: String, val image: String)
+class MovieImageFragment(
+    val id: String,
+    val image: String,
+    val bannerImage: String,
+    val duration: String,
+    val name: String,
+    val categories: String,
+    val sinopsis: String,
+    val stars: String,
+    val director: String,
+    val idDocument: String
+)
