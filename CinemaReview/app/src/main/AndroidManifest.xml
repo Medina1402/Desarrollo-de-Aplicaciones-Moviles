@@ -11,16 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".pages.MovieDescriptionItem"/>
-        <activity android:name=".pages.RegisterActivity" />
-        <activity android:name=".pages.MoviesActivity">
+
+        <activity android:name=".pages.LoginActivity" android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".pages.LoginActivity" />
+
+        <activity android:name=".pages.RegisterActivity" />
+        <activity android:name=".pages.MovieDescriptionItem"/>
+        <activity android:name=".pages.MoviesActivity"/>
     </application>
 
 </manifest>
