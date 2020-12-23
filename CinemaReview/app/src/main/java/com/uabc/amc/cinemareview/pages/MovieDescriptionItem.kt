@@ -62,8 +62,17 @@ class MovieDescriptionItem : AppCompatActivity(), FirestoreFirebase {
 
     fun deleteReview() {
         commentReviewCurrentMovie = false
+        movie_list_review_add_review.apply {
+            text = "Agregar reseña"
+            backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.colorAccent))
+        }
         intent.removeExtra("REVIEW_TEXT")
         intent.removeExtra("REVIEW_STARS")
+
+        val userId = SQLiteService.getUser()[0]
+
+        FirestoreCollection("user").document(userId).collection("history")
+            .document(idMovie).delete()
     }
 
     private fun updateStarMovie() {
@@ -123,7 +132,11 @@ class MovieDescriptionItem : AppCompatActivity(), FirestoreFirebase {
                 movie_list_review_container.apply {
                     layoutManager = LinearLayoutManager(this@MovieDescriptionItem)
                     setHasFixedSize(true)
-                    adapter = MovieReviewFragment(movieReviews, this@MovieDescriptionItem)
+                    adapter = MovieReviewFragment(
+                        movieReviews,
+                        this@MovieDescriptionItem,
+                        intent.getStringExtra("MOVIE_NAME") as String
+                    )
                 }
 
                 updateStarMovie()

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.uabc.amc.cinemareview.R
 import kotlinx.android.synthetic.main.item_movie_review_fragment.view.*
 
-class MovieReviewFragment(private val reviewList: List<MovieReview>, private val context: Context) : RecyclerView.Adapter<MovieReviewFragment.MovieReviewFragmentHolder>() {
+class MovieReviewFragment(private val reviewList: List<MovieReview>, private val context: Context, private val movie: String) : RecyclerView.Adapter<MovieReviewFragment.MovieReviewFragmentHolder>() {
     inner class MovieReviewFragmentHolder(item: View) : RecyclerView.ViewHolder(item)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieReviewFragmentHolder {
@@ -25,11 +25,14 @@ class MovieReviewFragment(private val reviewList: List<MovieReview>, private val
         holder.itemView.movie_review_stars.text = review.stars
         holder.itemView.movie_review_text.text = review.review
 
+        val _review = "Movie: " + movie + "\nReview: " + review.review + "\nStars: " + review.stars + "\nAutor: " + review.author
+
         holder.itemView.movie_review_shared.setOnClickListener {
             val intentShared = Intent(Intent.ACTION_SEND)
             Intent.FLAG_ACTIVITY_NEW_TASK.also { intentShared.flags = it }
             intentShared.type = "text/plain"
-            intentShared.putExtra(Intent.EXTRA_TEXT, review.review)
+            intentShared.putExtra(Intent.EXTRA_SUBJECT, "Review $movie")
+            intentShared.putExtra(Intent.EXTRA_TEXT, _review)
             context.startActivity(intentShared)
         }
     }

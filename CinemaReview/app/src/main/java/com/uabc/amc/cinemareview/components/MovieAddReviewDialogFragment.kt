@@ -12,13 +12,16 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
+import com.bumptech.glide.Glide
 import com.google.firebase.Timestamp
 import com.uabc.amc.cinemareview.R
 import com.uabc.amc.cinemareview.pages.MovieDescriptionItem
 import com.uabc.amc.cinemareview.services.FirestoreCollection
 import com.uabc.amc.cinemareview.services.FirestoreFirebase
 import com.uabc.amc.cinemareview.services.SQLiteService
+import kotlinx.android.synthetic.main.activity_movie_description_item.*
 import kotlinx.android.synthetic.main.fragment_movie_add_review_dialog.*
+import kotlinx.android.synthetic.main.fragment_movie_add_review_dialog.movie_list_review_add_review
 import java.lang.Integer.parseInt
 
 class MovieAddReviewDialogFragment(private val intent: Intent, private val appCompact: MovieDescriptionItem) : DialogFragment(), FirestoreFirebase {
@@ -172,7 +175,9 @@ class MovieAddReviewDialogFragment(private val intent: Intent, private val appCo
 
             FirestoreCollection("categories").document(idDocument)
                 .collection("movies").document(idMovie)
-                .collection("reviews").document(user[0]).set(commentReview).addOnCompleteListener {
+                .collection("reviews").document(user[0])
+                .set(commentReview).addOnCompleteListener {
+                    updateUserHistory(user[0], idDocument, idMovie, starsCounter.toString())
                     appCompact.updateDataFirebaseFirestore()
                     dismiss()
 
@@ -183,5 +188,23 @@ class MovieAddReviewDialogFragment(private val intent: Intent, private val appCo
                         }.show()
                 }
         }
+    }
+
+    private fun updateUserHistory(uid: String, documentId: String, movieId: String, starsUpdate: String) {
+
+        FirestoreCollection("user").document(uid).collection("history")
+            .document(movieId).set(hashMapOf(
+                "collection" to documentId,
+                "document" to movieId,
+                "created" to Timestamp.now(),
+                "name" to intent.getStringExtra("MOVIE_NAME"),
+                "director" to intent.getStringExtra("MOVIE_DIRECTOR"),
+                "stars" to starsUpdate,
+                "categories" to intent.getStringExtra("MOVIE_CATEGORIES"),
+                "sinopsis" to intent.getStringExtra("MOVIE_SINOPSIS"),
+                "duration" to intent.getStringExtra("MOVIE_DURATION"),
+                "cover" to intent.getStringExtra("MOVIE_BANNER"),
+                "image" to intent.getStringExtra("MOVIE_COVER")
+            )).addOnCompleteListener {}
     }
 }
