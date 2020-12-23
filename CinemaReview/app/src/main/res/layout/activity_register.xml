@@ -35,8 +35,8 @@
                 android:backgroundTint="@color/colorText_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:hint="Correo electronico"
+                android:inputType="text"
+                android:hint="Nombre de usuario"
                 tools:ignore="RtlHardcoded" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,7 +85,7 @@
                 android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Contraseña"
+                android:hint="Confirmar contraseña"
                 tools:ignore="RtlHardcoded" />
         </com.google.android.material.textfield.TextInputLayout>
 

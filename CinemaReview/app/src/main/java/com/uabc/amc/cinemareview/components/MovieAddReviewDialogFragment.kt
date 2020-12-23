@@ -1,29 +1,36 @@
 package com.uabc.amc.cinemareview.components
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
+import com.google.firebase.Timestamp
 import com.uabc.amc.cinemareview.R
+import com.uabc.amc.cinemareview.pages.MovieDescriptionItem
+import com.uabc.amc.cinemareview.services.FirestoreCollection
 import com.uabc.amc.cinemareview.services.FirestoreFirebase
+import com.uabc.amc.cinemareview.services.SQLiteService
 import kotlinx.android.synthetic.main.fragment_movie_add_review_dialog.*
+import java.lang.Integer.parseInt
 
-class MovieAddReviewDialogFragment : DialogFragment(), FirestoreFirebase {
+class MovieAddReviewDialogFragment(private val intent: Intent, private val appCompact: MovieDescriptionItem) : DialogFragment(), FirestoreFirebase {
     private lateinit var toolbar: Toolbar
+    private var starsCounter = 0
+    private var stars = listOf<ImageButton>()
 
     companion object {
         val TAG = "TAG TEXT"
 
-        fun display(fragmentManager: FragmentManager): MovieAddReviewDialogFragment {
-            val dialog = MovieAddReviewDialogFragment()
+        fun display(fragmentManager: FragmentManager, intent: Intent, appCompact: MovieDescriptionItem): MovieAddReviewDialogFragment {
+            val dialog = MovieAddReviewDialogFragment(intent, appCompact)
             dialog.show(fragmentManager, TAG)
             return dialog
         }
@@ -63,7 +70,7 @@ class MovieAddReviewDialogFragment : DialogFragment(), FirestoreFirebase {
         toolbar.setNavigationOnClickListener { dismiss() }
         updateDataFirebaseFirestore()
 
-        val stars = listOf<ImageButton>(
+        stars = listOf<ImageButton>(
             star_one,
             star_two,
             star_three,
@@ -77,8 +84,12 @@ class MovieAddReviewDialogFragment : DialogFragment(), FirestoreFirebase {
             star.setOnClickListener {
                 for(item in stars) resetColorStars(item, R.color.colorPrimary)
 
+                starsCounter = 0
+                var counterTemp = 0
                 for(item in stars) {
+                    counterTemp++
                     if(it == item) {
+                        starsCounter = counterTemp
                         resetColorStars(item, R.color.colorAccent)
                         return@setOnClickListener
                     } else resetColorStars(item, R.color.colorAccent)
@@ -86,6 +97,51 @@ class MovieAddReviewDialogFragment : DialogFragment(), FirestoreFirebase {
             }
         }
 
+        onLoadDataIntent()
+    }
+
+    private fun onLoadDataIntent() {
+        val manager = toolbar.parent as ViewManager
+
+        if(intent.getStringExtra("REVIEW_TEXT") != null && intent.getStringExtra("REVIEW_STARS") != null) {
+
+            val commentIntent = intent.getStringExtra("REVIEW_TEXT")
+            val starsIntent = parseInt(intent.getStringExtra("REVIEW_STARS") as String)
+            var counter = 0
+
+            comment_review.setText(commentIntent)
+            stars.forEach {
+                if(counter < starsIntent) resetColorStars(it, R.color.colorAccent)
+                counter++
+            }
+
+            manager.removeView(toolbar)
+            toolbarDelete.setOnMenuItemClickListener { menuItem ->
+                when(menuItem.itemId) {
+                    R.id.delete_movie_review -> {
+                        deleteReview()
+                        true
+                    }
+                    else -> false
+                }
+            }
+
+        } else manager.removeView(toolbarDelete)
+    }
+
+    private fun deleteReview() {
+        // Value ID's Movie
+        val idDocument = intent.getStringExtra("MOVIE_ID_DOCUMENT")!!
+        val idMovie = intent.getStringExtra("MOVIE_ID")!!
+        val user = SQLiteService.getUser()
+
+        FirestoreCollection("categories").document(idDocument)
+            .collection("movies").document(idMovie)
+            .collection("reviews").document(user[0]).delete().addOnCompleteListener {
+                appCompact.deleteReview()
+                appCompact.updateDataFirebaseFirestore()
+                dismiss()
+            }
     }
 
     private fun resetColorStars(item: ImageView, color: Int) {
@@ -93,6 +149,39 @@ class MovieAddReviewDialogFragment : DialogFragment(), FirestoreFirebase {
     }
 
     override fun updateDataFirebaseFirestore() {
-        movie_list_review_add_review.setOnClickListener { dismiss() }
+        // Value ID's Movie
+        val idDocument = intent.getStringExtra("MOVIE_ID_DOCUMENT")!!
+        val idMovie = intent.getStringExtra("MOVIE_ID")!!
+        val user = SQLiteService.getUser()
+
+        movie_list_review_add_review.setOnClickListener {
+            if(!comment_review.text?.isNotEmpty()!!) {
+                Toast.makeText(context, "sssssssssssss", (2000).toInt())
+                    .apply {
+                        setGravity(Gravity.BOTTOM, 0, 20)
+                    }.show()
+                return@setOnClickListener
+            }
+
+            val commentReview = hashMapOf(
+                "author" to user[1],
+                "stars" to starsCounter.toString(),
+                "text" to comment_review.text.toString(),
+                "date" to Timestamp.now()
+            )
+
+            FirestoreCollection("categories").document(idDocument)
+                .collection("movies").document(idMovie)
+                .collection("reviews").document(user[0]).set(commentReview).addOnCompleteListener {
+                    appCompact.updateDataFirebaseFirestore()
+                    dismiss()
+
+                }.addOnFailureListener {
+                    Toast.makeText(context, "Error al guardar la review", (2000).toInt())
+                        .apply {
+                            setGravity(Gravity.BOTTOM, 0, 20)
+                        }.show()
+                }
+        }
     }
 }

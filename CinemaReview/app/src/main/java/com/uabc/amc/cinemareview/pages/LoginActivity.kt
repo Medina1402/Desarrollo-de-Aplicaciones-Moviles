@@ -70,10 +70,40 @@ class LoginActivity : AppCompatActivity() {
                     email_login.text.toString(),
                     password_login.text.toString()
                 ).addOnCompleteListener {
-                    val userId = FIREBASE_AUTH.currentUser?.uid.toString()
-                    val collection = FirestoreCollection("user").document(userId)
+                    if(!it.isSuccessful) {
+                        Toast.makeText(this, "Error de acceso", (2000).toInt())
+                            .apply {
+                                setGravity(Gravity.BOTTOM, 0, 20)
+                            }.show()
+                        return@addOnCompleteListener
+                    }
 
-                    SQLiteService.RegisterUser(userId, collection, this)
+                    val data = FIREBASE_AUTH.currentUser
+                    if(data == null) {
+                        Toast.makeText(this, "Error de data user login", (2000).toInt())
+                            .apply {
+                                setGravity(Gravity.BOTTOM, 0, 20)
+                            }.show()
+                        return@addOnCompleteListener
+                    }
+
+                    SQLiteService.RegisterUser(
+                        data.uid,
+                        FirestoreCollection("user").document(data.uid),
+                        this
+                    )
+
+                    Intent(this, MoviesActivity::class.java)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                        .apply {
+                            startActivity(this)
+                            finish()
+                        }
+
+                }.addOnFailureListener {
+                    Toast.makeText(this, it.toString(), (2000).toInt()).apply {
+                        setGravity(Gravity.BOTTOM, 0, 20)
+                    }.show()
                 }
             } else {
                 Toast.makeText(this, "USER or EMAIL is invalid value", (2000).toInt()).apply {

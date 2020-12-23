@@ -47,10 +47,12 @@ class MovieViewFragment : Fragment(), FirestoreFirebase {
                     ))
                 }
             }.addOnCompleteListener {
-                movieBanner = data.toList()
+                if(it.isSuccessful) {
+                    movieBanner = data.toList()
 
-                // View Pager Adapter
-                view_pager_movie.adapter = MoviesViewPagerAdapter(movieBanner)
+                    // View Pager Adapter
+                    view_pager_movie.adapter = MoviesViewPagerAdapter(movieBanner)
+                }
             }
     }
 
@@ -78,14 +80,16 @@ class MovieViewFragment : Fragment(), FirestoreFirebase {
                         ))
                     }
                 }.addOnCompleteListener {
-                    data.add(MovieFragmentHorizontal(document.data["name"] as String, movies.toList()))
-                    movieScroll = data.toList()
+                    if(it.isSuccessful && it.isComplete) {
+                        data.add(MovieFragmentHorizontal(document.data["name"] as String, movies.toList()))
+                        movieScroll = data.toList()
 
-                    // Scroll List Movies Adapter
-                    movie_fragment_card_slide.apply {
-                        layoutManager = LinearLayoutManager(context)
-                        setHasFixedSize(true)
-                        adapter = context?.let { MovieFragmentHorizontalView(movieScroll, it) }
+                        // Scroll List Movies Adapter
+                        movie_fragment_card_slide.apply {
+                            layoutManager = LinearLayoutManager(context)
+                            setHasFixedSize(true)
+                            adapter = context?.let { MovieFragmentHorizontalView(movieScroll, it) }
+                        }
                     }
                 }
             }

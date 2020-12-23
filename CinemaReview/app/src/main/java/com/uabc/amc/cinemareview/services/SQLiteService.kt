@@ -20,8 +20,7 @@ class SQLiteService {
                         InsertUser(
                             userId,
                             data["username"] as String,
-                            data["email"] as String,
-                            data["password"] as String
+                            data["email"] as String
                         )
                     } else {
                         Toast.makeText(context, "signInWithEmail: ERROR DATA", (2000).toInt()).apply {
@@ -31,7 +30,7 @@ class SQLiteService {
                 }
         }
 
-        fun InsertUser(_id: String, username: String, email: String, password: String) {
+        fun InsertUser(_id: String, username: String, email: String) {
             val helper = DatabaseHelper?.writableDatabase?: return
 
             val contentValues = ContentValues()
@@ -39,16 +38,17 @@ class SQLiteService {
                 put("_id", _id)
                 put("username", username)
                 put("email", email)
-                put("password", password)
             }
 
             helper.insert("USER", null, contentValues)
+            helper.close()
         }
 
-        fun DeleteUser(_id: String) {
-            val helper = DatabaseHelper?.writableDatabase?: return
-            val whereArgs: Array<String> = arrayOf(_id)
-            helper.delete("USER", "_id = ?", whereArgs)
+        fun DeleteUser(context: Context?) {
+                DatabaseHelper = createDataBase(context)
+                val helper = this.DatabaseHelper?.writableDatabase
+                helper?.execSQL("delete from USER")
+                helper?.close()
         }
 
         fun isExistUser(context: Context): Boolean {
@@ -60,14 +60,33 @@ class SQLiteService {
 
             if(cursor.count == 0) return false
             else {
-                cursor.move(1)
-                return cursor.getString(cursor.getColumnIndex("_id")).length > 10
+                cursor.moveToFirst()
+                val temp = cursor.getString(cursor.getColumnIndex("_id")).length > 10
+                cursor.close()
+                helper.close()
+                return temp
             }
+        }
+
+        fun getUser(): List<String> {
+            val helper = DatabaseHelper?.readableDatabase
+            val columns: Array<String> = arrayOf("_id", "username", "email")
+            val cursor = helper?.query("USER", columns,
+                null, null, null, null, null)
+            val values = ArrayList<String>()
+
+            cursor?.moveToFirst()
+            values.add(cursor?.getString(cursor.getColumnIndex("_id")).toString())
+            values.add(cursor?.getString(cursor.getColumnIndex("username")).toString())
+            values.add(cursor?.getString(cursor.getColumnIndex("email")).toString())
+            cursor?.close()
+            helper?.close()
+            return values.toList()
         }
     }
 
 
-    private class createDataBase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+    private class createDataBase(context: Context?): SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
         companion object {
             val DATABASE_NAME = "MovieReview"
             val DATABASE_VERSION = 1
@@ -79,7 +98,6 @@ class SQLiteService {
                         "_id varchar(255) primary key, " +
                         "username varchar(255), " +
                         "email varchar(255), " +
-                        "password varchar(255)" +
                     ");")
         }
 

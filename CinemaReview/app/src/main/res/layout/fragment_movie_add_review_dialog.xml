@@ -13,8 +13,19 @@
         android:layout_height="wrap_content"
         app:elevation="0dp">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:paddingEnd="16dp"
+            android:paddingStart="6dp"
+            android:background="@color/colorPrimaryDark"
+            app:contentInsetStartWithNavigation="0dp"
+            app:navigationIcon="@drawable/ic_baseline_keyboard_backspace_24" />
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbarDelete"
+            app:menu="@menu/menu_delete_review"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:paddingEnd="16dp"
@@ -45,6 +56,7 @@
                 android:layout_height="wrap_content"
                 app:hintTextColor="@color/colorText_2">
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/comment_review"
                     android:inputType="textMultiLine"
                     android:background="@color/colorPrimary"
                     android:minLines="8"

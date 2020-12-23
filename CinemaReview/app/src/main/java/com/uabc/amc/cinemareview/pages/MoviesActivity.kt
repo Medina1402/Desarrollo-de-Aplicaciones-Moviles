@@ -12,6 +12,11 @@ import com.uabc.amc.cinemareview.views.SearchViewFragment
 import kotlinx.android.synthetic.main.activity_movies.*
 
 class MoviesActivity : AppCompatActivity() {
+    private val movieViewFragment = MovieViewFragment()
+    private val searchViewFragment = SearchViewFragment()
+    private val historyViewFragment = HistoryViewFragment()
+    private val accountViewFragment = AccountViewFragment(this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movies)
@@ -34,10 +39,10 @@ class MoviesActivity : AppCompatActivity() {
      */
     private fun selectItem(item: MenuItem): Boolean {
         val classItem = when(item.itemId) {
-            R.id.item_navigation_movie -> MovieViewFragment()
-            R.id.item_navigation_search -> SearchViewFragment()
-            R.id.item_navigation_history -> HistoryViewFragment()
-            R.id.item_navigation_account -> AccountViewFragment()
+            R.id.item_navigation_movie -> movieViewFragment
+            R.id.item_navigation_search -> searchViewFragment
+            R.id.item_navigation_history -> historyViewFragment
+            R.id.item_navigation_account -> accountViewFragment
             else -> null
         } ?: return false
 
