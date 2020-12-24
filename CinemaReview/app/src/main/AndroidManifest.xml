@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.uabc.amc.cinemareview">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,17 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".pages.LoginActivity" android:theme="@style/SplashScreen">
+        <activity android:name=".pages.InternetConnect"></activity>
+        <activity
+            android:name=".pages.LoginActivity"
+            android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".pages.RegisterActivity" />
-        <activity android:name=".pages.MovieDescriptionItem"/>
-        <activity android:name=".pages.MoviesActivity"/>
+        <activity android:name=".pages.MovieDescriptionItem" />
+        <activity android:name=".pages.MoviesActivity" />
     </application>
 
 </manifest>

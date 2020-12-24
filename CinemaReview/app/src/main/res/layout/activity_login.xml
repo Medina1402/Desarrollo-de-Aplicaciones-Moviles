@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:hint="Correo electronico"
+                android:hint="@string/login_email"
                 tools:ignore="RtlHardcoded" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -52,7 +52,7 @@
                 android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Contraseña"
+                android:hint="@string/login_password"
                 tools:ignore="RtlHardcoded" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -64,7 +64,7 @@
             android:backgroundTint="@color/colorAccent"
             android:textColor="@color/colorText_1"
             android:textStyle="bold"
-            android:text="INGRESAR"
+            android:text="@string/login_btn_message"
             tools:ignore="HardcodedText"/>
 
         <TextView
@@ -75,7 +75,7 @@
             android:layout_gravity="center"
             android:paddingHorizontal="15dp"
             android:paddingVertical="8dp"
-            android:text="CREAR CUENTA"
+            android:text="@string/login_btn_create_account"
             android:textColor="@color/colorText_2" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

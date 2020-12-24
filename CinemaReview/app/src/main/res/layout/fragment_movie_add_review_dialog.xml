@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5pt"
-                android:text="ESCRIBIR RESEÑA"/>
+                android:text="@string/movie_add_review_dialog_review"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -58,6 +58,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/comment_review"
                     android:inputType="textMultiLine"
+                    android:cursorVisible="true"
                     android:background="@color/colorPrimary"
                     android:minLines="8"
                     android:gravity="top|left"
@@ -78,7 +79,8 @@
                     android:layout_height="30sp"
                     android:scaleType="centerCrop"
                     android:layout_marginHorizontal="10dp"
-                    android:src="@drawable/ic_baseline_star_24"/>
+                    android:src="@drawable/ic_baseline_star_24"
+                    tools:ignore="ContentDescription" />
                 <ImageButton
                     android:id="@+id/star_two"
                     android:background="@color/colorPrimaryDark"
@@ -86,7 +88,8 @@
                     android:layout_height="30sp"
                     android:scaleType="centerCrop"
                     android:layout_marginHorizontal="10dp"
-                    android:src="@drawable/ic_baseline_star_24"/>
+                    android:src="@drawable/ic_baseline_star_24"
+                    tools:ignore="ContentDescription" />
                 <ImageButton
                     android:id="@+id/star_three"
                     android:background="@color/colorPrimaryDark"
@@ -94,7 +97,8 @@
                     android:layout_height="30sp"
                     android:scaleType="centerCrop"
                     android:layout_marginHorizontal="10dp"
-                    android:src="@drawable/ic_baseline_star_24"/>
+                    android:src="@drawable/ic_baseline_star_24"
+                    tools:ignore="ContentDescription" />
                 <ImageButton
                     android:id="@+id/star_four"
                     android:background="@color/colorPrimaryDark"
@@ -102,7 +106,8 @@
                     android:layout_height="30sp"
                     android:scaleType="centerCrop"
                     android:layout_marginHorizontal="10dp"
-                    android:src="@drawable/ic_baseline_star_24"/>
+                    android:src="@drawable/ic_baseline_star_24"
+                    tools:ignore="ContentDescription" />
                 <ImageButton
                     android:id="@+id/star_five"
                     android:background="@color/colorPrimaryDark"
@@ -110,7 +115,8 @@
                     android:layout_height="30sp"
                     android:scaleType="centerCrop"
                     android:layout_marginHorizontal="10dp"
-                    android:src="@drawable/ic_baseline_star_24"/>
+                    android:src="@drawable/ic_baseline_star_24"
+                    tools:ignore="ContentDescription" />
             </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
@@ -121,8 +127,7 @@
                 android:backgroundTint="@color/colorAccent"
                 android:textColor="@color/colorText_1"
                 android:textStyle="bold"
-                android:text="ENVIAR"
-                tools:ignore="HardcodedText" />
+                android:text="@string/movie_add_review_dialog_btn_send" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

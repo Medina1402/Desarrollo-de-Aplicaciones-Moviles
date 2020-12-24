@@ -19,6 +19,7 @@ import com.uabc.amc.cinemareview.pages.MovieDescriptionItem
 import com.uabc.amc.cinemareview.services.FirestoreCollection
 import com.uabc.amc.cinemareview.services.FirestoreFirebase
 import com.uabc.amc.cinemareview.services.SQLiteService
+import com.uabc.amc.cinemareview.utils.ToastMessage
 import kotlinx.android.synthetic.main.activity_movie_description_item.*
 import kotlinx.android.synthetic.main.fragment_movie_add_review_dialog.*
 import kotlinx.android.synthetic.main.fragment_movie_add_review_dialog.movie_list_review_add_review
@@ -159,10 +160,8 @@ class MovieAddReviewDialogFragment(private val intent: Intent, private val appCo
 
         movie_list_review_add_review.setOnClickListener {
             if(!comment_review.text?.isNotEmpty()!!) {
-                Toast.makeText(context, "sssssssssssss", (2000).toInt())
-                    .apply {
-                        setGravity(Gravity.BOTTOM, 0, 20)
-                    }.show()
+                // TODO: 23/12/2020
+                ToastMessage(ToastMessage.ERROR.INVALID_USER_LOGIN, context)
                 return@setOnClickListener
             }
 
@@ -182,10 +181,8 @@ class MovieAddReviewDialogFragment(private val intent: Intent, private val appCo
                     dismiss()
 
                 }.addOnFailureListener {
-                    Toast.makeText(context, "Error al guardar la review", (2000).toInt())
-                        .apply {
-                            setGravity(Gravity.BOTTOM, 0, 20)
-                        }.show()
+                    // TODO: 23/12/2020
+                    ToastMessage(ToastMessage.ERROR.INVALID_USER_LOGIN, context)
                 }
         }
     }

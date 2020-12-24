@@ -36,8 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:hint="Nombre de usuario"
-                tools:ignore="RtlHardcoded" />
+                android:hint="@string/register_name" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -53,8 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:hint="Correo electronico"
-                tools:ignore="RtlHardcoded" />
+                android:hint="@string/register_email" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -69,8 +67,7 @@
                 android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Contraseña"
-                tools:ignore="RtlHardcoded" />
+                android:hint="@string/register_password" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -85,8 +82,7 @@
                 android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Confirmar contraseña"
-                tools:ignore="RtlHardcoded" />
+                android:hint="@string/register_password_confirm" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
@@ -97,7 +93,6 @@
             android:backgroundTint="@color/colorAccent"
             android:textColor="@color/colorText_1"
             android:textStyle="bold"
-            android:text="REGISTRAR"
-            tools:ignore="HardcodedText" />
+            android:text="@string/register_btn_create_account" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

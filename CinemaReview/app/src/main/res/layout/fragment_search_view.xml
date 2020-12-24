@@ -50,6 +50,6 @@
             android:textSize="20sp"
             android:gravity="center"
             android:layout_gravity="center"
-            android:text="Sin resultados"/>
+            android:text="@string/search_results_empty"/>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

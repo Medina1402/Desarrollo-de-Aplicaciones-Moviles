@@ -9,18 +9,28 @@ import com.uabc.amc.cinemareview.R
 import com.uabc.amc.cinemareview.services.FIREBASE_AUTH
 import com.uabc.amc.cinemareview.services.FirestoreCollection
 import com.uabc.amc.cinemareview.services.SQLiteService
+import com.uabc.amc.cinemareview.utils.ToastMessage
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Search for record in SQLite
+        // Search for record in SQLite and status connection internet
         try {
-            beforeOnCreate()
+            if(!InternetConnect.isOnlineNetwork()) {
+                // Insert a stack Activities and remove before Activities
+                Intent(this, InternetConnect::class.java)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                    .apply {
+                        setTheme(R.style.AppTheme)
+                        startActivity(this)
+                        finish()
+                    }
+            } else beforeOnCreate()
+
         } catch (e: Error) {
-            Toast.makeText(this, "signInWithEmail: ERROR DATABASE", (2000).toInt()).apply {
-                setGravity(Gravity.BOTTOM, 0, 20)
-            }.show()
+            // TODO: 23/12/2020
+            ToastMessage(ToastMessage.ERROR.INVALID_USER_LOGIN, this)
         }
 
         // Default event
@@ -71,19 +81,15 @@ class LoginActivity : AppCompatActivity() {
                     password_login.text.toString()
                 ).addOnCompleteListener {
                     if(!it.isSuccessful) {
-                        Toast.makeText(this, "Error de acceso", (2000).toInt())
-                            .apply {
-                                setGravity(Gravity.BOTTOM, 0, 20)
-                            }.show()
+                        // TODO: 23/12/2020  
+                        ToastMessage(ToastMessage.ERROR.INVALID_USER_LOGIN, this)
                         return@addOnCompleteListener
                     }
 
                     val data = FIREBASE_AUTH.currentUser
                     if(data == null) {
-                        Toast.makeText(this, "Error de data user login", (2000).toInt())
-                            .apply {
-                                setGravity(Gravity.BOTTOM, 0, 20)
-                            }.show()
+                        // TODO: 23/12/2020  
+                        ToastMessage(ToastMessage.ERROR.INVALID_USER_LOGIN, this)
                         return@addOnCompleteListener
                     }
 
@@ -100,15 +106,10 @@ class LoginActivity : AppCompatActivity() {
                             finish()
                         }
 
-                }.addOnFailureListener {
-                    Toast.makeText(this, it.toString(), (2000).toInt()).apply {
-                        setGravity(Gravity.BOTTOM, 0, 20)
-                    }.show()
                 }
             } else {
-                Toast.makeText(this, "USER or EMAIL is invalid value", (2000).toInt()).apply {
-                    setGravity(Gravity.BOTTOM, 0, 20)
-                }.show()
+                // TODO: 23/12/2020
+                ToastMessage(ToastMessage.ERROR.INVALID_USER_LOGIN, this)
             }
         }
 

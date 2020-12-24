@@ -76,9 +76,8 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Director: "
-                                android:textStyle="bold"
-                                tools:ignore="HardcodedText" />
+                                android:text="@string/movie_description_item_director"
+                                android:textStyle="bold" />
 
                             <TextView
                                 android:id="@+id/movie_description_director"
@@ -145,10 +144,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingBottom="2sp"
-                        android:text="Sinopsis"
+                        android:text="@string/movie_description_item_sinopsis"
                         android:textSize="20sp"
-                        android:textStyle="bold"
-                        tools:ignore="HardcodedText" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/movie_description_sinopsis"
@@ -169,7 +167,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingBottom="2sp"
-                        android:text="Reseñas"
+                        android:text="@string/movie_description_item_review"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         tools:ignore="HardcodedText" />
@@ -186,11 +184,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="60sp"
                         android:gravity="center"
-                        android:text="SIN RESEÑAS"
+                        android:text="@string/movie_description_item_review_empty"
                         android:textColor="@color/colorText_3"
                         android:textSize="15sp"
-                        android:textStyle="bold"
-                        tools:ignore="HardcodedText" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -211,6 +208,5 @@
         android:backgroundTint="@color/colorAccent"
         android:textColor="@color/colorText_1"
         android:textStyle="bold"
-        android:text="AGREGAR RESEÑA"
-        tools:ignore="HardcodedText" />
+        android:text="@string/movie_description_item_add_review" />
 </LinearLayout>

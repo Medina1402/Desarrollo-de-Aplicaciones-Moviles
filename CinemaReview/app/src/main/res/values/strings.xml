@@ -1,14 +1,50 @@
 <resources>
     <string name="app_name">CinemaReview</string>
-    <string name="text_label_1">Page 1</string>
-    <string name="text_label_2">Page 2</string>
-    <string name="text_label_3">Page 3</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="text_label_4">Perfil</string>
-    <string name="title_activity_movies_page">MainActivity</string>
-    <string name="item_navigation_movie_text">Movie</string>
-    <string name="item_navigation_search_text">Search</string>
-    <string name="item_navigation_history_text">History</string>
-    <string name="item_navigation_account_text">Account</string>
+
+    <!--    LOGIN-->
+    <string name="login_email">Correo electronico</string>
+    <string name="login_password">Contraseña</string>
+    <string name="login_btn_message">INGRESAR</string>
+    <string name="login_btn_create_account">CREAR CUENTA</string>
+
+    <!--    REGISTER-->
+    <string name="register_name">Nombre de usuario</string>
+    <string name="register_email">Correo electronico</string>
+    <string name="register_password">Contraseña</string>
+    <string name="register_password_confirm">Confirmar contraseña</string>
+    <string name="register_btn_create_account">REGISTRAR</string>
+
+    <!--    ACCOUNT VIEW-->
+    <string name="account_view_username">Nombre de usuario: </string>
+    <string name="account_view_email">Correo electronico: </string>
+    <string name="account_view_btn_close">Cerrar session</string>
+
+    <!--    HISTORY VIEW-->
+    <string name="history_view_empty">HISTORIAL VACIO</string>
+
+    <!--    SEARCH VIEW-->
+    <string name="search_results_empty">Sin resultados</string>
+
+    <!--    MOVIE_REVIEW_ITEM-->
+    <string name="movie_review_shared">COMPARTIR</string>
+
+    <!--    MOVIE_DESCRIPTION_ITEM-->
+    <string name="movie_description_item_director">Director: </string>
+    <string name="movie_description_item_sinopsis">Sinopsis</string>
+    <string name="movie_description_item_review">Reseñas</string>
+    <string name="movie_description_item_review_empty">SIN RESEÑAS</string>
+    <string name="movie_description_item_add_review">SIN RESEÑAS</string>
+
+    <!--    MOVIE ADD REVIEW DIALOG-->
+    <string name="movie_add_review_dialog_review">ESCRIBIR RESEÑA</string>
+    <string name="movie_add_review_dialog_btn_send">ENVIAR</string>
+
+    <!--    MENU BOTTOM NAVIGATION-->
+    <string name="menu_bottom_navigation_movie">Movie</string>
+    <string name="menu_bottom_navigation_search">Search</string>
+    <string name="menu_bottom_navigation_history">History</string>
+    <string name="menu_bottom_navigation_account">Account</string>
+
+    <!--    MENU BOTTOM NAVIGATION-->
+    <string name="menu_review_delete">Delete</string>
 </resources>

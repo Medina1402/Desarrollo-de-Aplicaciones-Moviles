@@ -25,23 +25,17 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:textSize="16sp"
-            android:layout_height="wrap_content"
-            android:text="Abraham Medina Carrillo"
-            tools:ignore="HardcodedText" />
+            android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/movie_review_date"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="15/02/2015"
-            tools:ignore="HardcodedText" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/movie_review_text"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cinco jóvenes mutantes que acaban de descubrir sus habilidades, son encerrados en unas instalaciones secretas contra su voluntad y luchan por escapar de su pasado y salvarse a sí mismos."
-        tools:ignore="HardcodedText" />
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -66,9 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:text="4.3"
-                android:paddingHorizontal="5sp"
-                tools:ignore="HardcodedText" />
+                android:paddingHorizontal="5sp" />
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
@@ -78,12 +70,11 @@
             app:icon="@drawable/ic_baseline_share_24"
             android:textColor="@color/colorText_2"
             app:iconTint="@color/colorText_2"
-            android:text="compartir"
+            android:text="@string/movie_review_shared"
             android:elevation="0dp"
             android:textSize="12sp"
             app:iconSize="14sp"
-            android:backgroundTint="@color/colorPrimaryDark"
-            tools:ignore="HardcodedText"/>
+            android:backgroundTint="@color/colorPrimaryDark"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="20sp"
@@ -12,7 +11,7 @@
 
     <TextView
         android:textColor="@color/colorText_3"
-        android:text="Nombre de usuario: "
+        android:text="@string/account_view_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -31,7 +30,7 @@
     <TextView
         android:textColor="@color/colorText_3"
         android:paddingTop="20sp"
-        android:text="Correo electronico: "
+        android:text="@string/account_view_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -55,7 +54,6 @@
         android:backgroundTint="@color/colorAccent"
         android:textColor="@color/colorText_1"
         android:textStyle="bold"
-        android:text="Cerrar session"
-        tools:ignore="HardcodedText" />
+        android:text="@string/account_view_btn_close" />
 
 </LinearLayout>

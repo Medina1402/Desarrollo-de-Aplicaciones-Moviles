@@ -10,6 +10,7 @@ import com.uabc.amc.cinemareview.R
 import com.uabc.amc.cinemareview.services.FIREBASE_AUTH
 import com.uabc.amc.cinemareview.services.FirestoreCollection
 import com.uabc.amc.cinemareview.services.SQLiteService
+import com.uabc.amc.cinemareview.utils.ToastMessage
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
 
@@ -101,9 +102,8 @@ class RegisterActivity : AppCompatActivity() {
                         }
                 }
             } else {
-                Toast.makeText(this, "USER or EMAIL is invalid value", (2000).toInt()).apply {
-                    setGravity(Gravity.BOTTOM, 0, 20)
-                }.show()
+                // TODO: 23/12/2020
+                ToastMessage(ToastMessage.ERROR.INVALID_USER_LOGIN, this)
             }
         }
     }
