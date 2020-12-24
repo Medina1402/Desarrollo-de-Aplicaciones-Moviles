@@ -19,7 +19,7 @@
 
     <TextView
         android:id="@+id/empty_result"
-        android:textColor="@color/colorText_3"
+        android:textColor="@color/colorPrimary"
         android:textSize="20sp"
         android:layout_marginTop="40sp"
         android:textAlignment="center"

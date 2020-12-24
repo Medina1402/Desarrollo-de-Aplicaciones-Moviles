@@ -48,7 +48,7 @@ class MovieImageFragmentView(private val movies: List<MovieImageFragment>, priva
 }
 
 class MovieImageFragment(
-    val id: String,
+    var id: String,
     val image: String,
     val bannerImage: String,
     val duration: String,
@@ -57,5 +57,5 @@ class MovieImageFragment(
     val sinopsis: String,
     val stars: String,
     val director: String,
-    val idDocument: String
+    var idDocument: String
 )

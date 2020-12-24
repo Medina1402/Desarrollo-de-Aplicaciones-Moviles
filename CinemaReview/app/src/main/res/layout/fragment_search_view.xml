@@ -16,7 +16,6 @@
         tools:ignore="UselessParent">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/search_title_movie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:boxStrokeColor="@color/colorText_2"
@@ -31,6 +30,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText android:textColor="@color/colorPrimary"
+                android:id="@+id/search_title_movie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

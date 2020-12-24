@@ -20,7 +20,7 @@
     <string name="account_view_btn_close">Cerrar session</string>
 
     <!--    HISTORY VIEW-->
-    <string name="history_view_empty">HISTORIAL VACIO</string>
+    <string name="history_view_empty">Historial vacio</string>
 
     <!--    SEARCH VIEW-->
     <string name="search_results_empty">Sin resultados</string>
@@ -32,11 +32,11 @@
     <string name="movie_description_item_director">Director: </string>
     <string name="movie_description_item_sinopsis">Sinopsis</string>
     <string name="movie_description_item_review">Reseñas</string>
-    <string name="movie_description_item_review_empty">SIN RESEÑAS</string>
-    <string name="movie_description_item_add_review">SIN RESEÑAS</string>
+    <string name="movie_description_item_review_empty">Sin reseñas</string>
+    <string name="movie_description_item_add_review">Agregar reseña</string>
 
     <!--    MOVIE ADD REVIEW DIALOG-->
-    <string name="movie_add_review_dialog_review">ESCRIBIR RESEÑA</string>
+    <string name="movie_add_review_dialog_review">Escribir reseña</string>
     <string name="movie_add_review_dialog_btn_send">ENVIAR</string>
 
     <!--    MENU BOTTOM NAVIGATION-->
