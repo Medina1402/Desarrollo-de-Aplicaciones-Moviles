@@ -84,12 +84,14 @@ class MovieViewFragment : Fragment(), FirestoreFirebase {
                         data.add(MovieFragmentHorizontal(document.data["name"] as String, movies.toList()))
                         movieScroll = data.toList()
 
-                        // Scroll List Movies Adapter
-                        movie_fragment_card_slide.apply {
-                            layoutManager = LinearLayoutManager(context)
-                            setHasFixedSize(true)
-                            adapter = context?.let { MovieFragmentHorizontalView(movieScroll, it) }
-                        }
+                       if(context != null) {
+                           // Scroll List Movies Adapter
+                           movie_fragment_card_slide.apply {
+                               layoutManager = LinearLayoutManager(context)
+                               setHasFixedSize(true)
+                               adapter = MovieFragmentHorizontalView(movieScroll, context)
+                           }
+                       }
                     }
                 }
             }

@@ -5,33 +5,85 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
+import androidx.core.widget.addTextChangedListener
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.uabc.amc.cinemareview.R
+import com.uabc.amc.cinemareview.components.HistoryFragmentMovie
+import com.uabc.amc.cinemareview.components.MovieImageFragment
+import com.uabc.amc.cinemareview.services.FirestoreCollection
 import kotlinx.android.synthetic.main.fragment_search_view.*
 
 class SearchViewFragment : Fragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    companion object {
+        var titleSearch = ""
+    }
+    private var movies = ArrayList<MovieImageFragment>()
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search_view, container, false)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        movies = ArrayList<MovieImageFragment>()
+        FirestoreCollection("movies").get().addOnSuccessListener {
+            it.documents.forEach { documentSnapshot ->
+                val data = documentSnapshot.data ?: return@addOnSuccessListener
+
+                movies.add(MovieImageFragment(
+                    data["document"] as String,
+                    data["cover"] as String,
+                    data["image"] as String,
+                    data["duration"] as String,
+                    data["name"] as String,
+                    data["categories"] as String,
+                    data["sinopsis"] as String,
+                    data["stars"] as String,
+                    data["director"] as String,
+                    data["collection"] as String
+                ))
+            }
+        }.addOnCompleteListener { onResume() }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if(search_title_movie.text.toString().isNotEmpty()) searchEvent()
+        else setAdapterSearchMovie(movies.toList())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        search_title_movie.setOnEditorActionListener { _, actionId, _ ->
-            if(actionId == EditorInfo.IME_ACTION_DONE) {
-                search()
-                true
-            } else {
-                false
+        if(context != null) {
+            setAdapterSearchMovie(listOf())
+            search_movie_result.layoutManager = LinearLayoutManager(context)
+            search_movie_result.clearOnScrollListeners()
+            search_title_movie.addTextChangedListener {
+                searchEvent()
             }
         }
     }
 
-    private fun search() {
-        println(">>>>>>>>> " + search_title_movie.text.toString())
+    private fun searchEvent() {
+        val result = ArrayList<MovieImageFragment>()
+        titleSearch = search_title_movie.text.toString().toLowerCase()
+        val regex = Regex(pattern = titleSearch)
+
+        movies.forEach {
+            val matched = regex.containsMatchIn(input = it.name.toString().toLowerCase())
+            if(matched) result.add(it)
+        }
+
+        setAdapterSearchMovie(result.toList())
+    }
+
+    private fun setAdapterSearchMovie(result: List<MovieImageFragment>) {
+        if(result.isNotEmpty() && context != null) {
+            search_movie_result.adapter = HistoryFragmentMovie(result, requireContext())
+        }
     }
 }
