@@ -2,14 +2,13 @@ package com.uabc.amc.cinemareview.pages
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Gravity
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.uabc.amc.cinemareview.R
 import com.uabc.amc.cinemareview.services.FIREBASE_AUTH
 import com.uabc.amc.cinemareview.services.FirestoreCollection
 import com.uabc.amc.cinemareview.services.SQLiteService
 import com.uabc.amc.cinemareview.utils.ToastMessage
+import com.uabc.amc.cinemareview.utils.ToastMessage2
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -28,10 +27,7 @@ class LoginActivity : AppCompatActivity() {
                     }
             } else beforeOnCreate()
 
-        } catch (e: Error) {
-            // TODO: 23/12/2020
-            ToastMessage(ToastMessage.ERROR.INVALID_USER_LOGIN, this)
-        }
+        } catch (e: Error) {}
 
         // Default event
         super.onCreate(savedInstanceState)
@@ -81,15 +77,13 @@ class LoginActivity : AppCompatActivity() {
                     password_login.text.toString()
                 ).addOnCompleteListener {
                     if(!it.isSuccessful) {
-                        // TODO: 23/12/2020  
-                        ToastMessage(ToastMessage.ERROR.INVALID_USER_LOGIN, this)
+                        ToastMessage(ToastMessage.Companion.ERROR.ERROR_CONNECT_FIREBASE, this)
                         return@addOnCompleteListener
                     }
 
                     val data = FIREBASE_AUTH.currentUser
                     if(data == null) {
-                        // TODO: 23/12/2020  
-                        ToastMessage(ToastMessage.ERROR.INVALID_USER_LOGIN, this)
+                        ToastMessage(ToastMessage.Companion.ERROR.INVALID_USER_LOGIN, this)
                         return@addOnCompleteListener
                     }
 
@@ -108,8 +102,7 @@ class LoginActivity : AppCompatActivity() {
 
                 }
             } else {
-                // TODO: 23/12/2020
-                ToastMessage(ToastMessage.ERROR.INVALID_USER_LOGIN, this)
+                ToastMessage(ToastMessage.Companion.ERROR.EMPTY_USER, this)
             }
         }
 

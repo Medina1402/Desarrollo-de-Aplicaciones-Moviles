@@ -6,13 +6,11 @@ import android.os.Bundle
 import android.view.*
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
-import com.bumptech.glide.Glide
 import com.google.firebase.Timestamp
 import com.uabc.amc.cinemareview.R
 import com.uabc.amc.cinemareview.pages.MovieDescriptionItem
@@ -20,6 +18,7 @@ import com.uabc.amc.cinemareview.services.FirestoreCollection
 import com.uabc.amc.cinemareview.services.FirestoreFirebase
 import com.uabc.amc.cinemareview.services.SQLiteService
 import com.uabc.amc.cinemareview.utils.ToastMessage
+import com.uabc.amc.cinemareview.utils.ToastMessage2
 import kotlinx.android.synthetic.main.activity_movie_description_item.*
 import kotlinx.android.synthetic.main.fragment_movie_add_review_dialog.*
 import kotlinx.android.synthetic.main.fragment_movie_add_review_dialog.movie_list_review_add_review
@@ -160,8 +159,7 @@ class MovieAddReviewDialogFragment(private val intent: Intent, private val appCo
 
         movie_list_review_add_review.setOnClickListener {
             if(!comment_review.text?.isNotEmpty()!!) {
-                // TODO: 23/12/2020
-                ToastMessage(ToastMessage.ERROR.INVALID_USER_LOGIN, context)
+                context?.let { ctx -> ToastMessage(ToastMessage.Companion.ERROR.REVIEW_EMPTY, ctx) }
                 return@setOnClickListener
             }
 
@@ -181,8 +179,7 @@ class MovieAddReviewDialogFragment(private val intent: Intent, private val appCo
                     dismiss()
 
                 }.addOnFailureListener {
-                    // TODO: 23/12/2020
-                    ToastMessage(ToastMessage.ERROR.INVALID_USER_LOGIN, context)
+                    context?.let { ctx -> ToastMessage(ToastMessage.Companion.ERROR.REVIEW_UNSAVED, ctx) }
                 }
         }
     }

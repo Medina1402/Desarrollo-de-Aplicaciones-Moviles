@@ -48,4 +48,12 @@
 
     <!--    MENU BOTTOM NAVIGATION-->
     <string name="menu_review_delete">Delete</string>
+
+
+    <!-- ERRORS -->
+    <string name="INVALID_USER_LOGIN">El correo o contraseña son invalidos</string>
+    <string name="EMPTY_USER">Los campos no pueden estar vacios</string>
+    <string name="ERROR_CONNECT_FIREBASE">Ocurrio un error en la red</string>
+    <string name="REVIEW_EMPTY">La reseña esta vacia</string>
+    <string name="REVIEW_UNSAVED">No se pudo agregar la reseña</string>
 </resources>

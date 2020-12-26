@@ -1,19 +1,29 @@
 package com.uabc.amc.cinemareview.views
 
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.size
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uabc.amc.cinemareview.R
 import com.uabc.amc.cinemareview.components.*
 import com.uabc.amc.cinemareview.services.*
 import kotlinx.android.synthetic.main.fragment_movie_view.*
+import kotlinx.coroutines.*
+import java.lang.Runnable
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.concurrent.schedule
+import kotlin.concurrent.scheduleAtFixedRate
+import kotlin.system.measureTimeMillis
 
 class MovieViewFragment : Fragment(), FirestoreFirebase {
     private var movieBanner = listOf<MovieViewPager>()
     private var movieScroll = listOf<MovieFragmentHorizontal>()
+    private lateinit var runnable: Runnable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,9 +61,25 @@ class MovieViewFragment : Fragment(), FirestoreFirebase {
                     movieBanner = data.toList()
 
                     // View Pager Adapter
-                    view_pager_movie.adapter = MoviesViewPagerAdapter(movieBanner)
+                    val adapter = MoviesViewPagerAdapter(movieBanner)
+                    view_pager_movie.adapter = adapter
+                    delayNextViewPager()
                 }
             }
+    }
+
+    private fun delayNextViewPager() {
+        val handler = Handler()
+        runnable = Runnable {
+            try {
+                if(view_pager_movie != null) {
+                    if(view_pager_movie.size == view_pager_movie.currentItem) view_pager_movie.currentItem = 0
+                    else view_pager_movie.currentItem++
+                }
+                handler.postDelayed(runnable, 10000)
+            } catch (e: Error){}
+        }
+        handler.post(runnable)
     }
 
     private fun onLoadMovieScroll() {
