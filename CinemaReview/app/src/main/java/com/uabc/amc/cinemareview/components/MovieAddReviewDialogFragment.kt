@@ -18,7 +18,6 @@ import com.uabc.amc.cinemareview.services.FirestoreCollection
 import com.uabc.amc.cinemareview.services.FirestoreFirebase
 import com.uabc.amc.cinemareview.services.SQLiteService
 import com.uabc.amc.cinemareview.utils.ToastMessage
-import com.uabc.amc.cinemareview.utils.ToastMessage2
 import kotlinx.android.synthetic.main.activity_movie_description_item.*
 import kotlinx.android.synthetic.main.fragment_movie_add_review_dialog.*
 import kotlinx.android.synthetic.main.fragment_movie_add_review_dialog.movie_list_review_add_review

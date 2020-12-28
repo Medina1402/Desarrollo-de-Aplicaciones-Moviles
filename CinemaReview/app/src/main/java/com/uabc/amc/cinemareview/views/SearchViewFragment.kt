@@ -1,16 +1,21 @@
 package com.uabc.amc.cinemareview.views
 
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.view.Display
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uabc.amc.cinemareview.R
 import com.uabc.amc.cinemareview.components.HistoryFragmentMovie
 import com.uabc.amc.cinemareview.components.MovieImageFragment
 import com.uabc.amc.cinemareview.services.FirestoreCollection
+import com.uabc.amc.cinemareview.utils.MathScreen
+import com.uabc.amc.cinemareview.utils.MathScreen.Companion.WidthGrid
 import kotlinx.android.synthetic.main.fragment_search_view.*
 
 class SearchViewFragment : Fragment() {
@@ -59,11 +64,10 @@ class SearchViewFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if(context != null) {
-            setAdapterSearchMovie(listOf())
-            search_movie_result.layoutManager = LinearLayoutManager(context)
+            setAdapterSearchMovie(listOf()) // Load view
             search_movie_result.clearOnScrollListeners()
             search_title_movie.addTextChangedListener {
-                searchEvent()
+                searchEvent() // Change
             }
         }
     }
@@ -82,6 +86,11 @@ class SearchViewFragment : Fragment() {
     }
 
     private fun setAdapterSearchMovie(result: List<MovieImageFragment>) {
+        resources.displayMetrics.apply {
+            val grids = MathScreen.dpScreenGridAdapter(widthPixels, density, WidthGrid)
+            search_movie_result.layoutManager = GridLayoutManager(context, grids)
+        }
+
         if(result.isNotEmpty() && context != null) {
             search_movie_result.adapter = HistoryFragmentMovie(result, requireContext())
         }

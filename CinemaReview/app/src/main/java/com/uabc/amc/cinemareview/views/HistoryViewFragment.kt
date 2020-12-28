@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.uabc.amc.cinemareview.R
@@ -12,7 +13,9 @@ import com.uabc.amc.cinemareview.components.HistoryFragmentMovie
 import com.uabc.amc.cinemareview.components.MovieImageFragment
 import com.uabc.amc.cinemareview.services.FirestoreCollection
 import com.uabc.amc.cinemareview.services.SQLiteService
+import com.uabc.amc.cinemareview.utils.MathScreen
 import kotlinx.android.synthetic.main.fragment_history_view.*
+import kotlinx.android.synthetic.main.fragment_search_view.*
 
 class HistoryViewFragment : Fragment() {
     override fun onCreateView(
@@ -55,7 +58,10 @@ class HistoryViewFragment : Fragment() {
                 val items = movies.toList()
 
                 history_item_list.apply {
-                    layoutManager = LinearLayoutManager(context)
+                    resources.displayMetrics.apply {
+                        val grids = MathScreen.dpScreenGridAdapter(widthPixels, density, MathScreen.WidthGrid)
+                        layoutManager = GridLayoutManager(context, grids)
+                    }
                     setHasFixedSize(true)
                     adapter = HistoryFragmentMovie(items, context)
                 }

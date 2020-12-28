@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.Gravity
 import android.widget.Toast
 import com.uabc.amc.cinemareview.R
+import java.lang.Integer.parseInt
 
 class ToastMessage(error: ERROR, context: Context) {
     companion object {
@@ -21,7 +22,7 @@ class ToastMessage(error: ERROR, context: Context) {
     }
 
     init {
-        Toast.makeText(context, error.toString(context), 2000 as Int).apply {
+        Toast.makeText(context, error.toString(context), parseInt("2000")).apply {
             setGravity(Gravity.BOTTOM, 0, 20)
             show()
         }

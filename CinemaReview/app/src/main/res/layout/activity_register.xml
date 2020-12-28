@@ -7,13 +7,11 @@
     android:layout_height="match_parent"
     android:paddingHorizontal="35sp"
     android:background="@color/colorPrimaryDark"
-    android:orientation="vertical"
-    tools:context=".pages.LoginActivity">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="UselessLeaf"
         android:orientation="vertical">
         <ImageView
             android:layout_gravity="center"

@@ -11,7 +11,6 @@ import com.uabc.amc.cinemareview.services.FIREBASE_AUTH
 import com.uabc.amc.cinemareview.services.FirestoreCollection
 import com.uabc.amc.cinemareview.services.SQLiteService
 import com.uabc.amc.cinemareview.utils.ToastMessage
-import com.uabc.amc.cinemareview.utils.ToastMessage2
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
 

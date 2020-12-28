@@ -1,50 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:orientation="vertical"
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="UselessParent">
+        android:layout_margin="15dp"
+        app:boxBackgroundColor="@color/colorText_2"
+        app:boxStrokeColor="@color/colorText_2"
+        app:endIconDrawable="@drawable/ic_baseline_clear_24"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/colorPrimary"
+        app:placeholderText="@string/search_label_input"
+        app:startIconDrawable="@drawable/ic_baseline_search_24">
 
-        <com.google.android.material.textfield.TextInputLayout
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/search_title_movie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:boxStrokeColor="@color/colorText_2"
-            app:boxBackgroundColor="@color/colorText_2"
-            app:endIconMode="clear_text"
-            android:layout_margin="15dp"
-            app:placeholderText="@string/search_label_input"
-            app:startIconDrawable="@drawable/ic_baseline_search_24"
-            app:endIconTint="@color/colorPrimary"
-            app:endIconDrawable="@drawable/ic_baseline_clear_24"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            android:backgroundTint="@color/colorText_2"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimary" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/search_title_movie"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorText_2"
-                android:inputType="text"
-                android:singleLine="true"
-                android:textColor="@color/colorPrimary" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-    </LinearLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
 
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/search_movie_result"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </androidx.core.widget.NestedScrollView>
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/search_movie_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
 </LinearLayout>

@@ -7,13 +7,11 @@
     android:layout_height="match_parent"
     android:padding="35sp"
     android:background="@color/colorPrimaryDark"
-    android:orientation="vertical"
-    tools:context=".pages.LoginActivity">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:orientation="vertical">
         <ImageView
             android:layout_gravity="center"
@@ -25,9 +23,10 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_marginVertical="15sp"
-            android:theme="@style/ThemeOverlay.AppCompat.Light"
             android:layout_width="match_parent"
             app:endIconMode="clear_text"
+            app:hintTextColor="@color/colorPrimary"
+            android:textColor="@color/colorPrimary"
             app:endIconDrawable="@drawable/ic_baseline_clear_24"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
@@ -36,15 +35,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:hint="@string/login_email"
-                tools:ignore="RtlHardcoded" />
+                android:textColorHint="@color/colorPrimary"
+                android:textColor="@color/colorPrimary"
+                android:hint="@string/login_email"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_marginVertical="15sp"
-            android:theme="@style/ThemeOverlay.AppCompat.Light"
             android:layout_width="match_parent"
             app:endIconMode="password_toggle"
+            android:textColor="@color/colorPrimary"
+            app:hintTextColor="@color/colorPrimary"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password_login"
@@ -52,8 +53,9 @@
                 android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/login_password"
-                tools:ignore="RtlHardcoded" />
+                android:textColorHint="@color/colorPrimary"
+                android:textColor="@color/colorPrimary"
+                android:hint="@string/login_password" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton

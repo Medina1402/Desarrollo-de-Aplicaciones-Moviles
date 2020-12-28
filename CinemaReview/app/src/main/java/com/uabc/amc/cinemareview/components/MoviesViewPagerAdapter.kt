@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.uabc.amc.cinemareview.R
 import kotlinx.android.synthetic.main.item_view_pager_movie_view.view.*
 
-class MoviesViewPagerAdapter(private val movies: List<MovieViewPager>): RecyclerView.Adapter<MoviesViewPagerAdapter.MovieViewPagerViewHolder>() {
+class MoviesViewPagerAdapter(private val movies: List<MovieImageFragment>): RecyclerView.Adapter<MoviesViewPagerAdapter.MovieViewPagerViewHolder>() {
     inner class MovieViewPagerViewHolder(item: View) : RecyclerView.ViewHolder(item)
     private lateinit var context: Context
 
@@ -22,15 +22,13 @@ class MoviesViewPagerAdapter(private val movies: List<MovieViewPager>): Recycler
     override fun onBindViewHolder(holder: MovieViewPagerViewHolder, position: Int) {
         val movie = movies[position]
 
-        holder.itemView.title_view_item_pager_movie.text = movie.title
+        holder.itemView.title_view_item_pager_movie.text = movie.name
         holder.itemView.duration_view_item_pager_movie.text = movie.duration
-        holder.itemView.category_view_item_pager_movie.text = movie.category
-        Glide.with(context).load(movie.image).into(holder.itemView.image_view_item_pager_movie)
+        holder.itemView.category_view_item_pager_movie.text = movie.categories
+        Glide.with(context).load(movie.bannerImage).into(holder.itemView.image_view_item_pager_movie)
     }
 
     override fun getItemCount(): Int {
         return movies.size
     }
 }
-
-class MovieViewPager(val title: String, val duration: String, val category: String, val image: String)

@@ -20,14 +20,16 @@ import kotlin.concurrent.schedule
 import kotlin.concurrent.scheduleAtFixedRate
 import kotlin.system.measureTimeMillis
 
-class MovieViewFragment : Fragment(), FirestoreFirebase {
-    private var movieBanner = listOf<MovieViewPager>()
+class MovieViewFragment : Fragment() {
+    private var movieBanner = ArrayList<MovieImageFragment>()
     private var movieScroll = listOf<MovieFragmentHorizontal>()
     private lateinit var runnable: Runnable
+    private var counter = 1
+    private var increment = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        updateDataFirebaseFirestore()
+        onLoadMovieScroll()
     }
 
     override fun onCreateView(
@@ -38,43 +40,22 @@ class MovieViewFragment : Fragment(), FirestoreFirebase {
         return inflater.inflate(R.layout.fragment_movie_view, container, false)
     }
 
-    override fun updateDataFirebaseFirestore() {
-        onLoadMovieScroll()
-        onLoadMovieBanner()
+    private fun onLoadMovieBannerRecycler() {
+        // View Pager Adapter
+        val adapter = MoviesViewPagerAdapter(movieBanner.toList())
+        view_pager_movie.adapter = adapter
+        delayNextViewPager()
     }
 
-    private fun onLoadMovieBanner() {
-        val data: ArrayList<MovieViewPager> = ArrayList()
-
-        FirestoreCollection("movie_banner").get()
-            .addOnSuccessListener { result ->
-                result.forEach { document ->
-                    data.add(MovieViewPager(
-                        document.data["name"] as String,
-                        document.data["duration"] as String,
-                        document.data["categories"] as String,
-                        document.data["image"] as String,
-                    ))
-                }
-            }.addOnCompleteListener {
-                if(it.isSuccessful) {
-                    movieBanner = data.toList()
-
-                    // View Pager Adapter
-                    val adapter = MoviesViewPagerAdapter(movieBanner)
-                    view_pager_movie.adapter = adapter
-                    delayNextViewPager()
-                }
-            }
-    }
 
     private fun delayNextViewPager() {
         val handler = Handler()
         runnable = Runnable {
             try {
                 if(view_pager_movie != null) {
-                    if(view_pager_movie.size == view_pager_movie.currentItem) view_pager_movie.currentItem = 0
-                    else view_pager_movie.currentItem++
+                    if(view_pager_movie.adapter?.itemCount!! <= view_pager_movie.currentItem+1) increment = -1
+                    else if(view_pager_movie.currentItem == 0) increment = 1
+                    view_pager_movie.currentItem += increment
                 }
                 handler.postDelayed(runnable, 10000)
             } catch (e: Error){}
@@ -109,6 +90,11 @@ class MovieViewFragment : Fragment(), FirestoreFirebase {
                     if(it.isSuccessful && it.isComplete) {
                         data.add(MovieFragmentHorizontal(document.data["name"] as String, movies.toList()))
                         movieScroll = data.toList()
+                        movieScroll.forEach {
+                            for (movie in it.movies) {
+                                movieBanner.add(movie)
+                            }
+                        }
 
                        if(context != null) {
                            // Scroll List Movies Adapter
@@ -117,6 +103,8 @@ class MovieViewFragment : Fragment(), FirestoreFirebase {
                                setHasFixedSize(true)
                                adapter = MovieFragmentHorizontalView(movieScroll, context)
                            }
+
+                           if(--counter >= 0) onLoadMovieBannerRecycler()
                        }
                     }
                 }
