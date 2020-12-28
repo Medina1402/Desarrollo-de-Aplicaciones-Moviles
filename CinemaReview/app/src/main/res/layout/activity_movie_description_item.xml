@@ -8,7 +8,6 @@
     tools:context=".pages.MovieDescriptionItem">
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/movie_description_item"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -25,7 +24,6 @@
                 tools:ignore="ContentDescription" />
 
             <View
-                android:id="@+id/divider5"
                 android:layout_width="match_parent"
                 android:layout_height="90pt"
                 android:background="@drawable/degradado" />
@@ -191,7 +189,6 @@
             </LinearLayout>
 
             <TextureView
-                android:id="@+id/textureView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </FrameLayout>

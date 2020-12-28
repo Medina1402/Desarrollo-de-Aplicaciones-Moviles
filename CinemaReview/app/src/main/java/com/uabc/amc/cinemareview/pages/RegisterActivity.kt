@@ -2,8 +2,6 @@ package com.uabc.amc.cinemareview.pages
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Gravity
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Timestamp
 import com.uabc.amc.cinemareview.R
@@ -15,6 +13,10 @@ import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity() {
+    companion object {
+        var loginActivity: LoginActivity? = null
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -57,18 +59,12 @@ class RegisterActivity : AppCompatActivity() {
                     email_register.text.toString(), password_register.text.toString()
                 ).addOnCompleteListener { authResult ->
                     if (!authResult.isSuccessful) {
-                        Toast.makeText(this, "sssssssssssss", (2000).toInt())
-                            .apply {
-                                setGravity(Gravity.BOTTOM, 0, 20)
-                            }.show()
+                        ToastMessage(ToastMessage.Companion.ERROR.INVALID_USER_LOGIN, this)
                         return@addOnCompleteListener
                     }
                     val data = FIREBASE_AUTH.currentUser
                     if(data == null) {
-                        Toast.makeText(this, "axaxaxax", (2000).toInt())
-                            .apply {
-                                setGravity(Gravity.BOTTOM, 0, 20)
-                            }.show()
+                        ToastMessage(ToastMessage.Companion.ERROR.INVALID_USER_LOGIN, this)
                         return@addOnCompleteListener
                     }
 
@@ -87,12 +83,11 @@ class RegisterActivity : AppCompatActivity() {
                                 data.email.toString()
                             )
 
-                            Intent(this, MoviesActivity::class.java)
+                            val intent = Intent(this, MoviesActivity::class.java)
                                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                                .apply {
-                                    startActivity(this)
-                                    finish()
-                                }
+                            this.startActivity(intent)
+                            this.finish()
+                            loginActivity?.finish()
 
                         }.addOnFailureListener {
                             ToastMessage(ToastMessage.Companion.ERROR.INVALID_USER_LOGIN, this)

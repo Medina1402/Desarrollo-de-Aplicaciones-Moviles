@@ -23,7 +23,6 @@
     <string name="history_view_empty">Historial vacio</string>
 
     <!--    SEARCH VIEW-->
-    <string name="search_results_empty">Sin resultados</string>
     <string name="search_label_input">Buscar pelicula</string>
 
     <!--    MOVIE_REVIEW_ITEM-->

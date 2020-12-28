@@ -59,13 +59,11 @@ class LoginActivity : AppCompatActivity() {
         if (!SQLiteService.isExistUser(this)) return
 
         // Insert a stack Activities and remove before Activities
-        Intent(this, MoviesActivity::class.java)
+        val intent = Intent(this, MoviesActivity::class.java)
             .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-            .apply {
-                setTheme(R.style.AppTheme)
-                startActivity(this)
-                finish()
-            }
+        setTheme(R.style.AppTheme)
+        startActivity(intent)
+        finish()
     }
 
     private fun setup() {
@@ -76,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
                     password_login.text.toString()
                 ).addOnCompleteListener {
                     if(!it.isSuccessful) {
-                        ToastMessage(ToastMessage.Companion.ERROR.ERROR_CONNECT_FIREBASE, this)
+                        ToastMessage(ToastMessage.Companion.ERROR.INVALID_USER_LOGIN, this)
                         return@addOnCompleteListener
                     }
 
@@ -92,12 +90,10 @@ class LoginActivity : AppCompatActivity() {
                         this
                     )
 
-                    Intent(this, MoviesActivity::class.java)
+                    val intent = Intent(this, MoviesActivity::class.java)
                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                        .apply {
-                            startActivity(this)
-                            finish()
-                        }
+                    startActivity(intent)
+                    finish()
 
                 }
             } else {
@@ -106,6 +102,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         btn_register.setOnClickListener {
+            RegisterActivity.loginActivity = this
             Intent(this, RegisterActivity::class.java).apply {
                 startActivity(this)
             }
